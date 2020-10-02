@@ -38,14 +38,14 @@ public class MainScript {
 		myTamagotchi.show();
 		for (int i = 0; i < myTamagotchi.getLifeExpectancy(); i++) {
 
-			System.out.println("Bonjour debut du jour "+(i+1) );
+			System.out.println("\nBonjour debut du jour "+(i+1) );
 			for (int j = 0; j < 5; j++) {
 
 				gameMenu();
 				action = Clavier.lireInt();
 				switch (action) {
 				case 1: {
-					myTamagotchi.eat(5);
+					myTamagotchi.eat();
 					break;
 				}
 				case 2: {
@@ -117,6 +117,7 @@ public class MainScript {
 			myTamagotchi.show();
 			myTamagotchi.riseHeight();
 		}
+		System.out.println("Votre tamagotchi est mort de vieillesse");
 
 	}
 

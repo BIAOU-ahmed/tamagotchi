@@ -233,10 +233,21 @@ public class Tamagotchi {
 		}
 	}
 
-	public void eat(int nbFood) {
+	public void eat() {
 
 		if (hungerLevel > 0) {
-			decreasesHungerLevel(nbFood);
+			
+			if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))
+					) {
+
+				decreasesHungerLevel(15);
+			}
+			if (this.tamagotchiType.equals("Dragon")) {
+
+				decreasesHungerLevel(5);
+			}
+			
+			
 			if (hungerLevel == 0) {
 				System.out.println("\nVotre tamagotchi a bien manger il n'a plus faim\n");
 
@@ -270,9 +281,9 @@ public class Tamagotchi {
 	
 	public void rest() {
 		
-		if (this.tiredness<50 || this.dirtLevel>=60) {
+		if (this.dirtLevel>=60 || this.tiredness<50  ) {
 		
-			System.out.println("\nVotre tamagotchi n'est pas fatigué\n ");
+			System.out.println("\nVotre tamagotchi "+ ((this.dirtLevel>=60)?" est trop sale pour se reposer": "n'est pas fatigué\n ou il est trop "));
 		}else {
 			riseHealth(1);
 			setTiredness(0);
