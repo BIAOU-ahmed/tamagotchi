@@ -93,6 +93,12 @@ public class MainScript {
 				}
 				case 11: {
 
+					Tamagotchi myTamagotchiChild = new Tamagotchi(name, skinColor, hairColor, tamagotchiType);
+
+					break;
+				}
+				case 12: {
+
 					myTamagotchi.die();
 					break;
 				}
@@ -133,6 +139,7 @@ public class MainScript {
 		System.out.println("8: pour qu'il enleve sont masque");
 		System.out.println("9: pour qu'il se lave");
 		System.out.println("10: pour le faire fumer");
+		System.out.println("12: pour qu'il se reproduise");
 		System.out.println("11: pour le tuer");
 	}
 

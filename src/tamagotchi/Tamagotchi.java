@@ -369,6 +369,12 @@ public class Tamagotchi {
 		
 	}
 	
+	public void breed() {
+		System.out.println("\nVotre tamagotchi est mort\n");
+		setHealth(0);
+		System.exit(-1);
+	}
+	
 	public void die() {
 		System.out.println("\nVotre tamagotchi est mort\n");
 		setHealth(0);
