@@ -1,4 +1,4 @@
-package tamagitchi;
+package tamagotchi;
 
 import outils.Clavier;
 

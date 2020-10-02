@@ -1,4 +1,4 @@
-package tamagitchi;
+package tamagotchi;
 
 public class Tamagotchi {
 
@@ -239,12 +239,13 @@ public class Tamagotchi {
 			
 			if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))
 					) {
+				
 
-				decreasesHungerLevel(15);
+				decreasesHungerLevel(20);
 			}
 			if (this.tamagotchiType.equals("Dragon")) {
 
-				decreasesHungerLevel(5);
+				decreasesHungerLevel(10);
 			}
 			
 			
