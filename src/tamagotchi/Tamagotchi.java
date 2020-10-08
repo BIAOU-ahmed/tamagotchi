@@ -18,6 +18,14 @@ public class Tamagotchi {
 	int tiredness = 0;
 	int toiletDesire = 0;
 
+	
+	/**
+	 * 
+	 * @param name
+	 * @param skinColor
+	 * @param hairColor
+	 * @param tamagotchiType
+	 */
 	public Tamagotchi(String name, String skinColor, String hairColor, String tamagotchiType) {
 		// TODO Auto-generated constructor stub
 		setName(name);
@@ -39,99 +47,193 @@ public class Tamagotchi {
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getSkinColor() {
 		return skinColor;
 	}
 
+	/**
+	 * 
+	 * @param skinColor
+	 */
 	public void setSkinColor(String skinColor) {
 		this.skinColor = skinColor;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getHairColor() {
 		return hairColor;
 	}
 
+	/**
+	 * 
+	 * @param hairColor
+	 */
 	public void setHairColor(String hairColor) {
 		this.hairColor = hairColor;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getTamagotchiType() {
 		return tamagotchiType;
 	}
 
-	
+	/**
+	 * 
+	 * @param tiredness
+	 */
 	public void setTiredness(int tiredness) {
 		this.tiredness = tiredness;
 	}
 
+	/**
+	 * 
+	 * @param tamagotchiType
+	 */
 	public void setTamagotchiType(String tamagotchiType) {
 		this.tamagotchiType = tamagotchiType;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * 
+	 * @param height
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getHealth() {
 		return health;
 	}
 
+	/**
+	 * 
+	 * @param health
+	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getLifeExpectancy() {
 		return lifeExpectancy;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getHungerLevel() {
 		return hungerLevel;
 	}
 
+	/**
+	 * 
+	 * @param hungerLevel
+	 */
 	public void setHungerLevel(int hungerLevel) {
 		this.hungerLevel = hungerLevel;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTiredness() {
 		return tiredness;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isMasked() {
 		return masked;
 	}
 
+	/**
+	 * 
+	 * @param masked
+	 */
 	public void setMasked(boolean masked) {
 		this.masked = masked;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getDirtLevel() {
 		return dirtLevel;
 	}
 
+	/**
+	 * 
+	 * @param dirtLevel
+	 */
 	public void setDirtLevel(int dirtLevel) {
 		this.dirtLevel = dirtLevel;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getToiletDesire() {
 		return toiletDesire;
 	}
 
+	/**
+	 * 
+	 * @param toiletDesire
+	 */
 	public void setToiletDesire(int toiletDesire) {
 		this.toiletDesire = toiletDesire;
 	}
 
+	/**
+	 *  
+	 */
 	public void show() {
 		System.out.println("\nVoici les caracteristique de votre tamagotchi :");
 		System.out.println("Nom : " + this.name);
