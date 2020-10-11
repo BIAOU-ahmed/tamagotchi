@@ -39,46 +39,19 @@ public class MainScript {
 
 		Tamagotchi myTamagotchi = new Tamagotchi(name, skinColor, hairColor, tamagotchiType);
 
-		for (int i = 0; i < listOfTamagotchi.length; i++) {
-			if (null == listOfTamagotchi[i]) {
-
-				listOfTamagotchi[i] = myTamagotchi;
-				break;
-			}
-		}
-		for (int i = 0; i < listOfTamagotchi.length; i++) {
-			if (null == listOfTamagotchi[i]) {
-				
-				System.out.println("vide");
-				
-			}else {
-				System.out.println(listOfTamagotchi[i].getName());
-			}
-		}
-
 		do {
 
-			System.out.println("\nBonjour debut du jour " + daysCounter);
-			if(nbOfTamagotchiInTable(listOfTamagotchi)>0) {
-				boolean askAgain = false;
-				do {
-					System.out.println("Voulez vous continuer avec votre tamagotchi actuel O/N");
-					String response = Clavier.lireString();
-					if(response.equals("O")) {
-						System.out.println("Vous avez decidez de continuer avec  votre tamagotchi");
-					}else if(response.equals("N")) {
-						
-						displayTamagotchiInTable(listOfTamagotchi);
-					}else {
-						System.out.println("Choix eronner \nVeuillez choisir un des proposition");
-						askAgain = true;
-					}
-				} while (askAgain);
-				
-				
-			}
-			for (int j = 0; j < 5; j++) {
+			System.out.println("\nBonjour debut du jour "
+					+ ((myTamagotchi.getLifeExpectancy() - myTamagotchi.getDayRemaining()) + 1));
 
+			if (tamagotchiType.equals("Chat") || tamagotchiType.equals("Chien") ) {
+				myTamagotchi.setNbAction(myTamagotchi.getACTIONMAX());
+			}else if( tamagotchiType.equals("Dragon")) {
+				myTamagotchi.setNbAction(myTamagotchi.getACTIONMAXDRAGON());
+			}
+			
+			do {
+				
 				myTamagotchi.show();
 				gameMenu();
 				action = Clavier.lireInt();
@@ -92,6 +65,7 @@ public class MainScript {
 					break;
 				}
 				case 3: {
+					System.out.println("Veuillez entrez la nouvel couleur des cheuveux de votre tamagotchi");
 					String newHairColor = Clavier.lireString();
 					myTamagotchi.setHairColor(newHairColor);
 					break;
@@ -140,22 +114,46 @@ public class MainScript {
 
 					System.out.println("Veuillez donner un nom a votre nouvelle tamagotchi");
 					String newTamagotchiName = Clavier.lireString();
+
 					Tamagotchi myTamagotchiChild = new Tamagotchi(newTamagotchiName, skinColor, hairColor,
 							tamagotchiType);
+					Tamagotchi tamagotchiTemp = myTamagotchi;
+					System.out.println("Voullez vous continuez avec la nouvel tamagotchi ? O/N");
+					String response = Clavier.lireString();
+					if (response.equals("O")) {
+						System.out.println("Vous avez decidez de changer de tamagotchi ");
 
-					System.out.println("Voullez vous continuez avec la nouvel tamagotchi ?");
+						myTamagotchi = myTamagotchiChild;
+					} else if (response.equals("N")) {
+
+						tamagotchiTemp = myTamagotchiChild;
+					} else {
+						System.out.println("Choix eronner \nVeuillez choisir un des proposition");
+
+					}
+
+					for (int i = 0; i < listOfTamagotchi.length; i++) {
+						if (null == listOfTamagotchi[i]) {
+
+							listOfTamagotchi[i] = tamagotchiTemp;
+							break;
+						}
+					}
 					break;
 				}
 				case 12: {
 
-					myTamagotchi.die();
+					myTamagotchi.setHealth(0);
+					
 					break;
 				}
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + action);
 				}
-
-			}
+				
+				myTamagotchi.decreasesNbAction(1);
+			} while (myTamagotchi.getNbAction()>0);
+		
 
 			if (myTamagotchi.getDirtLevel() == 100 || myTamagotchi.getTiredness() == 100
 					|| myTamagotchi.getHungerLevel() == 100 || myTamagotchi.getToiletDesire() == 100) {
@@ -165,16 +163,60 @@ public class MainScript {
 			if (nbObligation > 2) {
 				myTamagotchi.decreasesHealth(2);
 			} else {
-				myTamagotchi.decreasesHealth(1);
+				if(myTamagotchi.getHealth()>0) {
+					myTamagotchi.decreasesHealth(1);
+				}
+				
 			}
 
 			myTamagotchi.riseHeight();
 
 			daysCounter++;
 			myTamagotchi.decreasesdayRemaining(1);
-		} while (myTamagotchi.getDayRemaining() > 0);
 
-		System.out.println("Votre tamagotchi est mort de vieillesse");
+			if (myTamagotchi.getHealth() > 0 && myTamagotchi.getDayRemaining() == 0) {
+				System.out.println("Votre tamagotchi est mort de vieillesse");
+			}
+
+			if ((myTamagotchi.getHealth() == 0 || myTamagotchi.getDayRemaining() == 0)
+					&& (nbOfTamagotchiInTable(listOfTamagotchi) > 0)) {
+				System.out.println("Un nouveau tamagotchi a été choisi pour vous ");
+
+				myTamagotchi = listOfTamagotchi[0];
+				listOfTamagotchi[0] = null;
+
+			}
+			if (nbOfTamagotchiInTable(listOfTamagotchi) > 0) {
+				boolean askAgain = false;
+				do {
+					System.out.println("Voulez vous continuer avec votre tamagotchi actuel O/N");
+					String response = Clavier.lireString();
+					if (response.equals("O")) {
+						System.out.println("Vous avez decidez de continuer avec  votre tamagotchi");
+					} else if (response.equals("N")) {
+
+						displayTamagotchiInTable(listOfTamagotchi);
+						System.out.println("Veuillez entrer le numero du nouveaux tamagotchi");
+						int newtamagotchi = Clavier.lireInt();
+						if (newtamagotchi <= nbOfTamagotchiInTable(listOfTamagotchi) && newtamagotchi > 0) {
+							Tamagotchi tamagotchiTemp = listOfTamagotchi[newtamagotchi - 1];
+							if (myTamagotchi.getHealth() > 0) {
+								listOfTamagotchi[newtamagotchi - 1] = myTamagotchi;
+							} else {
+								listOfTamagotchi[newtamagotchi - 1] = null;
+							}
+
+							myTamagotchi = tamagotchiTemp;
+						}
+					} else {
+						System.out.println("Choix eronner \nVeuillez choisir un des proposition");
+						askAgain = true;
+					}
+				} while (askAgain);
+
+			}
+
+		} while (myTamagotchi.getDayRemaining() > 0);
 
 	}
 
@@ -193,34 +235,32 @@ public class MainScript {
 		System.out.println("11: pour qu'il se reproduise");
 		System.out.println("12: pour le tuer");
 	}
-	
+
 	public static int nbOfTamagotchiInTable(Tamagotchi[] tab) {
 		int result = 0;
-		
+
 		for (int i = 0; i < tab.length; i++) {
 			if (tab[i] != null) {
-				
+
 				result++;
-				
+
 			}
 		}
-		
+
 		return result;
 	}
+
 	public static void displayTamagotchiInTable(Tamagotchi[] tab) {
-		
-		
+
 		System.out.println("\nVoici la liste des tamagotchi d'ont vous disposez\n");
 		for (int i = 0; i < tab.length; i++) {
 			if (tab[i] != null) {
-				
-				System.out.println((i+1)+": Nom: "+tab[i].getName()+" Type: "+tab[i].getTamagotchiType());
-				
-				
+
+				System.out.println((i + 1) + ": Nom: " + tab[i].getName() + " Type: " + tab[i].getTamagotchiType());
+
 			}
 		}
-		
-		
+
 	}
 
 }

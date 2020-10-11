@@ -7,10 +7,13 @@ public class Tamagotchi {
 	String hairColor;
 	String tamagotchiType;
 	boolean masked;
-
-	int dirtLevel = 0;
 	final int HEALTHMAXCAT = 10;
 	final int HEALTHMAXDRAGON = 20;
+	final int ACTIONMAX = 5;
+	final int ACTIONMAXDRAGON = 5;
+	int nbAction;
+	int dirtLevel = 0;
+	
 	int dayRemaining;
 	int height;
 	int health;
@@ -39,6 +42,7 @@ public class Tamagotchi {
 			health = HEALTHMAXDRAGON;
 			lifeExpectancy = 6;
 			dayRemaining = 6;
+			nbAction = 5;
 
 		} else if (tamagotchiType.equals("Chat") || tamagotchiType.equals("Chien")) {
 
@@ -46,8 +50,26 @@ public class Tamagotchi {
 			health = HEALTHMAXCAT;
 			lifeExpectancy = 4;
 			dayRemaining = 4;
+			nbAction = 5;
 		}
 	}
+
+	
+	/**
+	 * @return the aCTIONMAX
+	 */
+	public int getACTIONMAX() {
+		return ACTIONMAX;
+	}
+
+
+	/**
+	 * @return the aCTIONMAXDRAGON
+	 */
+	public int getACTIONMAXDRAGON() {
+		return ACTIONMAXDRAGON;
+	}
+
 
 	/**
 	 * 
@@ -105,7 +127,6 @@ public class Tamagotchi {
 		return tamagotchiType;
 	}
 
-	
 	/**
 	 * @return the dayRemaining
 	 */
@@ -118,6 +139,20 @@ public class Tamagotchi {
 	 */
 	public void setDayRemaining(int dayRemaining) {
 		this.dayRemaining = dayRemaining;
+	}
+
+	/**
+	 * @return the nbAction
+	 */
+	public int getNbAction() {
+		return nbAction;
+	}
+
+	/**
+	 * @param nbAction the nbAction to set
+	 */
+	public void setNbAction(int nbAction) {
+		this.nbAction = nbAction;
 	}
 
 	/**
@@ -177,12 +212,11 @@ public class Tamagotchi {
 	 */
 	public void setHealth(int health) {
 
-		if (this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien")
-				) {
+		if (this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien")) {
 
 			if (health > 10) {
 				health = 10;
-			}else if (health <= 5) {
+			} else if (health > 0 && health <= 5) {
 				System.out.println("\nAttention votre tamagotchi n'as plus beaucoup de vie\n");
 			}
 		}
@@ -190,17 +224,18 @@ public class Tamagotchi {
 
 			if (health > 20) {
 				health = 20;
-			}else if (health <= 10) {
+			} else if (health > 0 && health <= 10) {
 				System.out.println("\nAttention votre tamagotchi n'as plus beaucoup de vie\n");
 			}
 		}
-	
-
-		if (health < 0) {
-			health = 0;
-			die();
-		}
 		this.health = health;
+		if (health <= 0) {
+			health = 0;
+			setNbAction(0);
+			setDayRemaining(0);
+			System.out.println("\nVotre tamagotchi est mort\n");
+
+		}
 
 	}
 
@@ -301,8 +336,8 @@ public class Tamagotchi {
 			toiletDesire = 100;
 		} else if (toiletDesire >= 50) {
 			System.out.println("\nVotre tamagotchi a  trés envie d'aller au toilet\n");
-		}else if(toiletDesire <0) {
-			toiletDesire =0;
+		} else if (toiletDesire < 0) {
+			toiletDesire = 0;
 		}
 		this.toiletDesire = toiletDesire;
 	}
@@ -328,22 +363,25 @@ public class Tamagotchi {
 	}
 
 	public void decreasesdayRemaining(int number) {
-		setDayRemaining(this.dayRemaining - number); 
+		setDayRemaining(this.dayRemaining - number);
 	}
-	
+	public void decreasesNbAction(int number) {
+		setNbAction(this.nbAction - number);
+	}
+
 	public void riseHeight() {
 
 		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
 
-			setHeight(this.height + 2); 
+			setHeight(this.height + 2);
 		}
 		if (this.tamagotchiType.equals("Dragon")) {
-			setHeight(this.height + 5); 
+			setHeight(this.height + 5);
 		}
 	}
 
 	public void riseToiletDesire(int number) {
-		setToiletDesire(this.toiletDesire + number); 
+		setToiletDesire(this.toiletDesire + number);
 
 	}
 
@@ -357,7 +395,6 @@ public class Tamagotchi {
 		setTiredness(this.tiredness + number);
 
 	}
-
 
 	public void riseHungerLevel(int number) {
 
@@ -378,7 +415,7 @@ public class Tamagotchi {
 	}
 
 	public void decreasesToiletDisire(int number) {
-		setToiletDesire(this.toiletDesire - number); 
+		setToiletDesire(this.toiletDesire - number);
 	}
 
 	public void riseHealth(int number) {
@@ -389,7 +426,7 @@ public class Tamagotchi {
 
 	public void decreasesHealth(int number) {
 		setHealth(this.health - number);
-		
+
 	}
 
 	public void eat() {
@@ -514,15 +551,15 @@ public class Tamagotchi {
 		this.masked = false;
 		System.out.println("Votre tamagotchi a bien enlevé son masque");
 	}
-	
+
 	public void putMask() {
 		this.masked = true;
 		System.out.println("Votre tamagotchi a bien mis son masque");
 	}
 
 	public void wash() {
-		
-		if (this.toiletDesire < 50  && this.dirtLevel >= 30) {
+
+		if (this.toiletDesire < 50 && this.dirtLevel >= 30) {
 			System.out.println("\n" + this.name + " c'est bien laver il est tous propre :)\n");
 			setDirtLevel(0);
 			riseTiredness(2);
@@ -532,11 +569,11 @@ public class Tamagotchi {
 				System.out.println("\nVotre tamagotchi n'est pas assez sale pour se douché");
 			} else if (this.toiletDesire >= 50) {
 				System.out.println("\nLe tamagotchi a trop envie d'aller au toilet pour aller se douché \n ");
-			} 
+			}
 		}
-		
+
 		System.out.println();
-		
+
 	}
 
 	public void smok() {
@@ -565,8 +602,8 @@ public class Tamagotchi {
 	}
 
 	public void die() {
-		System.out.println("\nVotre tamagotchi est mort\n");
+
 		setHealth(0);
-		System.exit(-1);
+		setDayRemaining(0);
 	}
 }
