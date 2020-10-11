@@ -11,6 +11,7 @@ public class Tamagotchi {
 	int dirtLevel = 0;
 	final int HEALTHMAXCAT = 10;
 	final int HEALTHMAXDRAGON = 20;
+	int dayRemaining;
 	int height;
 	int health;
 	int lifeExpectancy;
@@ -18,7 +19,6 @@ public class Tamagotchi {
 	int tiredness = 0;
 	int toiletDesire = 0;
 
-	
 	/**
 	 * 
 	 * @param name
@@ -35,15 +35,17 @@ public class Tamagotchi {
 		setHeight(height);
 		if (tamagotchiType.equals("Dragon")) {
 
-			height =35;
+			height = 35;
 			health = HEALTHMAXDRAGON;
 			lifeExpectancy = 6;
+			dayRemaining = 6;
 
 		} else if (tamagotchiType.equals("Chat") || tamagotchiType.equals("Chien")) {
-			
-			height =15;
+
+			height = 15;
 			health = HEALTHMAXCAT;
 			lifeExpectancy = 4;
+			dayRemaining = 4;
 		}
 	}
 
@@ -103,11 +105,37 @@ public class Tamagotchi {
 		return tamagotchiType;
 	}
 
+	
+	/**
+	 * @return the dayRemaining
+	 */
+	public int getDayRemaining() {
+		return dayRemaining;
+	}
+
+	/**
+	 * @param dayRemaining the dayRemaining to set
+	 */
+	public void setDayRemaining(int dayRemaining) {
+		this.dayRemaining = dayRemaining;
+	}
+
 	/**
 	 * 
 	 * @param tiredness
 	 */
 	public void setTiredness(int tiredness) {
+
+		if (tiredness >= 100) {
+			System.out.println("Votre tamagotchi est trés trés fatigué il a besoin de repos\n");
+			tiredness = 100;
+		} else if (tiredness >= 50) {
+			System.out.println("Votre tamagotchi est fatigué");
+		}
+		if (tiredness < 0) {
+			tiredness = 0;
+		}
+
 		this.tiredness = tiredness;
 	}
 
@@ -148,7 +176,32 @@ public class Tamagotchi {
 	 * @param health
 	 */
 	public void setHealth(int health) {
+
+		if (this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien")
+				) {
+
+			if (health > 10) {
+				health = 10;
+			}else if (health <= 5) {
+				System.out.println("\nAttention votre tamagotchi n'as plus beaucoup de vie\n");
+			}
+		}
+		if (this.tamagotchiType.equals("Dragon")) {
+
+			if (health > 20) {
+				health = 20;
+			}else if (health <= 10) {
+				System.out.println("\nAttention votre tamagotchi n'as plus beaucoup de vie\n");
+			}
+		}
+	
+
+		if (health < 0) {
+			health = 0;
+			die();
+		}
 		this.health = health;
+
 	}
 
 	/**
@@ -172,7 +225,15 @@ public class Tamagotchi {
 	 * @param hungerLevel
 	 */
 	public void setHungerLevel(int hungerLevel) {
+
+		if (hungerLevel > 100) {
+			hungerLevel = 100;
+		}
+		if (hungerLevel < 0) {
+			hungerLevel = 0;
+		}
 		this.hungerLevel = hungerLevel;
+
 	}
 
 	/**
@@ -212,6 +273,12 @@ public class Tamagotchi {
 	 * @param dirtLevel
 	 */
 	public void setDirtLevel(int dirtLevel) {
+		if (dirtLevel >= 100) {
+			System.out.println("\nVotre tamagotchi est trés trés sale veuiller le laver\n");
+			dirtLevel = 100;
+		} else if (dirtLevel >= 50) {
+			System.out.println("\nVotre tamagotchi est sale veuiller le laver\n");
+		}
 		this.dirtLevel = dirtLevel;
 	}
 
@@ -228,6 +295,15 @@ public class Tamagotchi {
 	 * @param toiletDesire
 	 */
 	public void setToiletDesire(int toiletDesire) {
+
+		if (toiletDesire >= 100) {
+			System.out.println("\nVotre tamagotchi a trés trés envie d'aller au toilet\n");
+			toiletDesire = 100;
+		} else if (toiletDesire >= 50) {
+			System.out.println("\nVotre tamagotchi a  trés envie d'aller au toilet\n");
+		}else if(toiletDesire <0) {
+			toiletDesire =0;
+		}
 		this.toiletDesire = toiletDesire;
 	}
 
@@ -244,124 +320,97 @@ public class Tamagotchi {
 		System.out.println("Santé : " + this.health + " Vie");
 		System.out.println("Faim : " + this.hungerLevel);
 		System.out.println("Esperence de vie : " + this.lifeExpectancy);
+		System.out.println("Il reste  : " + this.dayRemaining + " jour a vivre a vrotre tamagotchi");
+
 		System.out.println("Fatigue : " + this.tiredness);
 		System.out.println("Niveaux saleté : " + this.dirtLevel);
 		System.out.println("Envie d'allez au toilet : " + this.toiletDesire);
 	}
-	
-	public void riseHeight() {
-		
-		
-		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))
-				) {
 
-			this.height += 2;
-		}
-		if (this.tamagotchiType.equals("Dragon")) {
-			this.height += 5;
-		}
+	public void decreasesdayRemaining(int number) {
+		setDayRemaining(this.dayRemaining - number); 
 	}
 	
+	public void riseHeight() {
+
+		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
+
+			setHeight(this.height + 2); 
+		}
+		if (this.tamagotchiType.equals("Dragon")) {
+			setHeight(this.height + 5); 
+		}
+	}
 
 	public void riseToiletDesire(int number) {
-		this.toiletDesire += number;
+		setToiletDesire(this.toiletDesire + number); 
 
-		if (this.toiletDesire >= 100) {
-			System.out.println("Votre tamagotchi a trés trés envie d'aller au toilet");
-			setToiletDesire(100);
-		} else if (this.toiletDesire >= 50) {
-			System.out.println("Votre tamagotchi a  trés envie d'aller au toilet");
-		}
 	}
 
 	public void riseDirtyLevel(int number) {
 
-		this.dirtLevel += number;
+		setDirtLevel(this.dirtLevel + number);
 
-		if (this.dirtLevel >= 100) {
-			System.out.println("Votre tamagotchi est trés trés sale veuiller le laver");
-			setDirtLevel(100);
-		} else if (this.dirtLevel >= 50) {
-			System.out.println("Votre tamagotchi est sale veuiller le laver");
-		}
 	}
 
 	public void riseTiredness(int number) {
-		this.tiredness += number;
-		if (this.tiredness >= 100) {
-			System.out.println("Votre tamagotchi est trés trés fatigué il a besoin de repos\n");
-			setTiredness(100);
-		} else if (this.tiredness >= 50) {
-			System.out.println("Votre tamagotchi est fatigué");
-		}
+		setTiredness(this.tiredness + number);
+
 	}
-	public void decreasestiredness(int number) {
-		this.tiredness += number;
-	
-	}
-	
+
+
 	public void riseHungerLevel(int number) {
-		this.hungerLevel += number;
+
+		setHungerLevel(this.hungerLevel + number);
 	}
-	
-	
+
 	public void decreasesHungerLevel(int number) {
-		this.hungerLevel -= number;
+
+		setHungerLevel(this.hungerLevel - number);
+
+		if (this.hungerLevel == 0) {
+			System.out.println("\nVotre tamagotchi a bien manger il n'a plus faim\n");
+
+		} else {
+
+			System.out.println("\nVotre tamagotchi a manger mais il a toujour faim\n");
+		}
 	}
 
 	public void decreasesToiletDisire(int number) {
-		this.toiletDesire -= number;
+		setToiletDesire(this.toiletDesire - number); 
 	}
 
 	public void riseHealth(int number) {
 
-		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))
-				&& this.health < this.HEALTHMAXCAT) {
-
-			this.health += number;
-		}
-		if (this.tamagotchiType.equals("Dragon") && this.health < this.HEALTHMAXDRAGON) {
-			this.health += number;
-		}
+		setHealth(this.health + number);
 
 	}
 
 	public void decreasesHealth(int number) {
-		this.health -= number;
-		if (this.health<=0) {
-			die();
-		}else if (this.health<=5) {
-			System.out.println("Attention votre tamagotchi n'as plus beaucoup de vie");
-		}
+		setHealth(this.health - number);
+		
 	}
 
 	public void eat() {
 
-		if (hungerLevel > 0) {
-			
-			if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))
-					) {
-				
+		if (hungerLevel > 0 && this.toiletDesire < 50) {
 
-				decreasesHungerLevel(20);
+			if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
+
+				decreasesHungerLevel(35);
 			}
 			if (this.tamagotchiType.equals("Dragon")) {
 
-				decreasesHungerLevel(10);
-			}
-			
-			
-			if (hungerLevel == 0) {
-				System.out.println("\nVotre tamagotchi a bien manger il n'a plus faim\n");
-
-			} else {
-
-				System.out.println("\nVotre tamagotchi a manger mais il a toujour faim\n");
+				decreasesHungerLevel(25);
 			}
 
 			riseDirtyLevel(5);
-			riseToiletDesire(20);
+			riseToiletDesire(15);
 			riseTiredness(5);
+		} else if (this.toiletDesire >= 50) {
+			System.out.println(
+					"\nVotre tamagotchi a trop envie d'aller au toilet pour manger il risque de se faire dessus\n");
 		} else {
 			System.out.println("\nVotre tamagotchi n'a pas faim vous ne pouvez pas le nourir\n");
 		}
@@ -369,95 +418,133 @@ public class Tamagotchi {
 	}
 
 	public void goToToilet() {
-		if (this.toiletDesire>=50) {
+		if (this.toiletDesire >= 50) {
+			System.out.println(this.name + "\nest allé au toilet il n'a plus envie d'aller au toilet\n");
 			setToiletDesire(0);
 			riseDirtyLevel(5);
 			riseHungerLevel(5);
 			riseTiredness(3);
-		}else {
+		} else {
 			System.out.println("\nVotre tamagotchi n'as pas envie d'aller au toilet\n");
 		}
-		
-	}
-	
 
-	
+	}
+
 	public void rest() {
-		
-		if (this.dirtLevel>=60 || this.tiredness<50  ) {
-		
-			System.out.println("\nVotre tamagotchi "+ ((this.dirtLevel>=60)?" est trop sale pour se reposer": "n'est pas fatigué\n ou il est trop "));
-		}else {
+
+		if (this.dirtLevel >= 60 || this.tiredness < 50 || this.toiletDesire >= 75 || this.hungerLevel >= 65) {
+
+			if (this.dirtLevel >= 60) {
+				System.out.println("\nVotre tamagotchi est trop sale pour se reposer");
+			} else if (this.tiredness < 50) {
+				System.out.println("\nVotre tamagotchi n'est pas assez fatigué pour se reposer");
+			} else if (this.toiletDesire >= 75) {
+				System.out.println("\nVotre tamagotchi est trop envie d'aller au toilet pour se reposer");
+			} else if (this.hungerLevel >= 65) {
+				System.out.println("\nVotre tamagotchi a trop faim pour se reposer");
+			}
+
+		} else {
+			System.out.println(this.name + " c'est bien reposé et est plein d'energie pour tous faire");
 			riseHealth(1);
 			setTiredness(0);
 			riseHungerLevel(15);
 			riseToiletDesire(10);
 		}
-		
-		
+
 	}
 
 	public void expressMood() {
 
-		if (this.health<5 || this.tiredness>=70) {
+		if (this.health < 5 || this.tiredness >= 70) {
 			System.out.println("Grogne de colere ");
-		}else if(this.health==5 || this.tiredness>=50 ){
+		} else if (this.health == 5 || this.tiredness >= 50) {
 			System.out.println("Souris ");
-		}else {
+		} else {
 			System.out.println("Saute de joie ");
 		}
-		
 
 	}
 
 	public void seeFriends() {
 
-		if (this.tiredness<80) {
-			System.out.println("\n"+this.name+" est content d'avoir rendu visite a un ami\n");
+		if (this.tiredness < 65 && this.toiletDesire < 50 && this.hungerLevel < 50 && this.dirtLevel < 40) {
+			System.out.println("\n" + this.name + " est content d'avoir rendu visite a un ami\n");
 			riseHealth(1);
 			riseTiredness(20);
 			riseToiletDesire(10);
 			riseDirtyLevel(30);
 			riseHungerLevel(20);
-		}else {
-			System.out.println("\nLe tamagotchi est trop fatigué pour rendre visite a un ami\n ");
+		} else {
+
+			if (this.dirtLevel >= 40) {
+				System.out.println("\nVotre tamagotchi est trop sale pour rendre visite a ses amis");
+			} else if (this.tiredness >= 65) {
+				System.out.println("\nLe tamagotchi est trop fatigué pour rendre visite a un ami\n ");
+			} else if (this.toiletDesire >= 50) {
+				System.out.println("\nVotre tamagotchi a trop envie d'aller au toilet pour rendre visite a un ami");
+			} else if (this.hungerLevel >= 50) {
+				System.out.println("\nVotre tamagotchi a trop faim pour rendre visite a un ami");
+			}
 		}
-		
 
 	}
-	
+
 	public void playSports() {
-		if (this.tiredness<=70) {
+		if (this.tiredness < 70 && this.toiletDesire < 65 && this.hungerLevel < 70) {
+			System.out.println(this.name + " viens de faire du sport  ");
 			riseHealth(2);
 			riseTiredness(60);
 			riseDirtyLevel(60);
 			riseHungerLevel(15);
-			riseToiletDesire(10);
-		}else {
-			System.out.println("\nVotre tamagotchi est tros fatigué pour faire du sport\n");
+			riseToiletDesire(5);
+		} else {
+			if (this.tiredness >= 70) {
+				System.out.println("\nVotre tamagotchi est tros fatigué pour faire du sport\n");
+			} else if (this.toiletDesire >= 65) {
+				System.out.println("\nVotre tamagotchi a trop envie d'aller au toilet pour faire du sport");
+			} else if (this.hungerLevel >= 50) {
+				System.out.println("\nVotre tamagotchi a trop faim pour faire du sport");
+			}
 		}
-		
+
 	}
 
 	public void takeOffMask() {
 		this.masked = false;
+		System.out.println("Votre tamagotchi a bien enlevé son masque");
+	}
+	
+	public void putMask() {
+		this.masked = true;
+		System.out.println("Votre tamagotchi a bien mis son masque");
 	}
 
 	public void wash() {
+		
+		if (this.toiletDesire < 50  && this.dirtLevel >= 30) {
+			System.out.println("\n" + this.name + " c'est bien laver il est tous propre :)\n");
+			setDirtLevel(0);
+			riseTiredness(2);
+		} else {
+
+			if (this.dirtLevel < 30) {
+				System.out.println("\nVotre tamagotchi n'est pas assez sale pour se douché");
+			} else if (this.toiletDesire >= 50) {
+				System.out.println("\nLe tamagotchi a trop envie d'aller au toilet pour aller se douché \n ");
+			} 
+		}
+		
 		System.out.println();
-		setDirtLevel(0);
-		riseTiredness(2);
+		
 	}
-
-
 
 	public void smok() {
 
-		System.out.println("\n"+this.name+" vient de fummer\n");
+		System.out.println("\n" + this.name + " vient de fummer\n");
 		riseDirtyLevel(5);
 		riseHungerLevel(20);
-		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))
-				) {
+		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
 
 			decreasesHealth(5);
 			riseToiletDesire(10);
@@ -468,15 +555,15 @@ public class Tamagotchi {
 			riseToiletDesire(5);
 			riseTiredness(2);
 		}
-		
+
 	}
-	
+
 	public void breed() {
 		System.out.println("\nVotre tamagotchi est mort\n");
 		setHealth(0);
 		System.exit(-1);
 	}
-	
+
 	public void die() {
 		System.out.println("\nVotre tamagotchi est mort\n");
 		setHealth(0);
