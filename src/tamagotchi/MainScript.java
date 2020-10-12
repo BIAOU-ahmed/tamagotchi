@@ -2,12 +2,25 @@ package tamagotchi;
 
 import outils.Clavier;
 
+/**
+ * This Program is for a small and console clone of
+ * the tamagotchi game with function chose by us
+ * @author ahmed
+ *
+ */
 public class MainScript {
 
+	static Tamagotchi[] listOfTamagotchi = new Tamagotchi[10];
+	
+	/**
+	 * Is the main of the game ask the user to do a 
+	 * choice of the action which he want
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Tamagotchi[] listOfTamagotchi = new Tamagotchi[10];
+		
 		int daysCounter = 1;
 		int action;
 		String tamagotchiType;
@@ -131,31 +144,13 @@ public class MainScript {
 
 					Tamagotchi myTamagotchiChild = new Tamagotchi(newTamagotchiName, skinColor, hairColor,
 							tamagotchiType);
-					Tamagotchi tamagotchiTemp = myTamagotchi;
-					System.out.println("Voullez vous continuez avec la nouvel tamagotchi ? O/N");
-					String response = Clavier.lireString();
-					if (response.equals("O")) {
-						System.out.println("Vous avez decidez de changer de tamagotchi ");
-
+					
+					newtamago = reproduce(myTamagotchi, myTamagotchiChild);
+					if (newtamago) {
 						myTamagotchi = myTamagotchiChild;
 						myTamagotchi.setNbAction(0);
-						newtamago = true;
-						
-					} else if (response.equals("N")) {
-
-						tamagotchiTemp = myTamagotchiChild;
-					} else {
-						System.out.println("Choix eronner \nVeuillez choisir un des proposition");
-
 					}
-
-					for (int i = 0; i < listOfTamagotchi.length; i++) {
-						if (null == listOfTamagotchi[i]) {
-
-							listOfTamagotchi[i] = tamagotchiTemp;
-							break;
-						}
-					}
+					
 					break;
 				}
 				case 12: {
@@ -201,8 +196,18 @@ public class MainScript {
 						&& (nbOfTamagotchiInTable(listOfTamagotchi) > 0)) {
 					System.out.println("Un nouveau tamagotchi a été choisi pour vous ");
 
-					myTamagotchi = listOfTamagotchi[0];
-					listOfTamagotchi[0] = null;
+					for (int i = 0; i < listOfTamagotchi.length; i++) {
+						if (null != listOfTamagotchi[i]) {
+
+							myTamagotchi = listOfTamagotchi[i];
+							listOfTamagotchi[i] = null;
+							
+							break;
+						}
+					}
+					
+					
+					continue;
 
 				}
 				/*
@@ -210,33 +215,8 @@ public class MainScript {
 				 * if you change the current is put in the table
 				 */
 				if (nbOfTamagotchiInTable(listOfTamagotchi) > 0) { //add "and tamagotchi.health > 0
-					boolean askAgain = false;
-					do {
-						System.out.println("Voulez vous continuer avec votre tamagotchi actuel O/N");
-						String response = Clavier.lireString();
-						if (response.equals("O")) {
-							System.out.println("Vous avez decidez de continuer avec  votre tamagotchi");
-						} else if (response.equals("N")) {
-
-							displayTamagotchiInTable(listOfTamagotchi);
-							System.out.println("Veuillez entrer le numero du nouveaux tamagotchi");
-							int newtamagotchi = Clavier.lireInt();
-							if (newtamagotchi <= nbOfTamagotchiInTable(listOfTamagotchi) && newtamagotchi > 0) {
-								Tamagotchi tamagotchiTemp = listOfTamagotchi[newtamagotchi - 1];
-								if (myTamagotchi.getHealth() > 0) {
-									listOfTamagotchi[newtamagotchi - 1] = myTamagotchi;
-								} else {
-									listOfTamagotchi[newtamagotchi - 1] = null;
-								}
-
-								myTamagotchi = tamagotchiTemp;
-							}
-						} else {
-							System.out.println("Choix eronner \nVeuillez choisir un des proposition");
-							askAgain = true;
-						}
-					} while (askAgain);
-
+				
+					myTamagotchi = changeTamago(myTamagotchi);
 				}
 			}
 
@@ -298,5 +278,69 @@ public class MainScript {
 		}
 
 	}
+	
+	public static Tamagotchi changeTamago(Tamagotchi myTamagotchi) {
+		boolean askAgain = false;
+		Tamagotchi result = myTamagotchi;
+		do {
+			System.out.println("Voulez vous continuer avec votre tamagotchi actuel O/N");
+			String response = Clavier.lireString();
+			if (response.equals("O")) {
+				System.out.println("Vous avez decidez de continuer avec  votre tamagotchi");
+			} else if (response.equals("N")) {
 
+				displayTamagotchiInTable(listOfTamagotchi);
+				System.out.println("Veuillez entrer le numero du nouveaux tamagotchi");
+				int newtamagotchi = Clavier.lireInt();
+				if (newtamagotchi <= nbOfTamagotchiInTable(listOfTamagotchi) && newtamagotchi > 0) {
+					Tamagotchi tamagotchiTemp = listOfTamagotchi[newtamagotchi - 1];
+					if (myTamagotchi.getHealth() > 0) {
+						listOfTamagotchi[newtamagotchi - 1] = myTamagotchi;
+					} else {
+						listOfTamagotchi[newtamagotchi - 1] = null;
+					}
+
+					result = tamagotchiTemp;
+				}
+			} else {
+				System.out.println("Choix eronner \nVeuillez choisir un des proposition");
+				askAgain = true;
+			}
+		} while (askAgain);
+		
+		return result;
+		
+	}
+
+	public static boolean reproduce(Tamagotchi myTamagotchi, Tamagotchi  myTamagotchiChild) {
+		
+		boolean result = false;
+		Tamagotchi tamagotchiTemp = myTamagotchi;
+		System.out.println("Voullez vous continuez avec la nouvel tamagotchi ? O/N");
+		String response = Clavier.lireString();
+		if (response.equals("O")) {
+			System.out.println("Vous avez decidez de changer de tamagotchi ");
+
+			//myTamagotchi = myTamagotchiChild;
+			//myTamagotchi.setNbAction(0);
+			result = true;
+			
+		} else if (response.equals("N")) {
+
+			tamagotchiTemp = myTamagotchiChild;
+		} else {
+			System.out.println("Choix eronner \nVeuillez choisir un des proposition");
+
+		}
+
+		for (int i = 0; i < listOfTamagotchi.length; i++) {
+			if (null == listOfTamagotchi[i]) {
+
+				listOfTamagotchi[i] = tamagotchiTemp;
+				break;
+			}
+		}
+		return result;
+		
+	}
 }
