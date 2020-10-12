@@ -23,7 +23,7 @@ public class Tamagotchi {
 	int toiletDesire = 0;
 
 	/**
-	 * 
+	 * This method is the constructor he set the value of the new tamagotchi 
 	 * @param name
 	 * @param skinColor
 	 * @param hairColor
@@ -73,14 +73,14 @@ public class Tamagotchi {
 
 	/**
 	 * 
-	 * @return
+	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * 
+	 * put the value of name in this name
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -89,14 +89,14 @@ public class Tamagotchi {
 
 	/**
 	 * 
-	 * @return
+	 * @return the color of the tamagotchis skin
 	 */
 	public String getSkinColor() {
 		return skinColor;
 	}
 
 	/**
-	 * 
+	 * put the value of skinColor in this skinColor
 	 * @param skinColor
 	 */
 	public void setSkinColor(String skinColor) {
@@ -105,7 +105,7 @@ public class Tamagotchi {
 
 	/**
 	 * 
-	 * @return
+	 * @return the color of the hair
 	 */
 	public String getHairColor() {
 		return hairColor;
@@ -121,7 +121,7 @@ public class Tamagotchi {
 
 	/**
 	 * 
-	 * @return
+	 * @return the type of the tamagotchi
 	 */
 	public String getTamagotchiType() {
 		return tamagotchiType;
@@ -343,7 +343,7 @@ public class Tamagotchi {
 	}
 
 	/**
-	 *  
+	 *  This method display the  tamagotchi feature
 	 */
 	public void show() {
 		System.out.println("\nVoici les caracteristique de votre tamagotchi :");
@@ -362,13 +362,25 @@ public class Tamagotchi {
 		System.out.println("Envie d'allez au toilet : " + this.toiletDesire);
 	}
 
+	/**
+	 * decreases the number of days by "number"
+	 * @param number
+	 */
 	public void decreasesdayRemaining(int number) {
 		setDayRemaining(this.dayRemaining - number);
 	}
+	
+	/**
+	 * decreases the number of action by "number"
+	 * @param number
+	 */
 	public void decreasesNbAction(int number) {
 		setNbAction(this.nbAction - number);
 	}
 
+	/**
+	 * rise the number of height by "number" depending on the tamagotchi type
+	 */
 	public void riseHeight() {
 
 		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
@@ -380,27 +392,51 @@ public class Tamagotchi {
 		}
 	}
 
+	/**
+	 * rise the toilet desire
+	 * @param number
+	 */
 	public void riseToiletDesire(int number) {
 		setToiletDesire(this.toiletDesire + number);
 
 	}
+	
+	public void decreasesToiletDisire(int number) {
+		setToiletDesire(this.toiletDesire - number);
+	}
 
+	/**
+	 * rise the dirty level by "number"
+	 * @param number
+	 */
 	public void riseDirtyLevel(int number) {
 
 		setDirtLevel(this.dirtLevel + number);
 
 	}
 
+	/**
+	 * rise the tiredness by "number"
+	 * @param number
+	 */
 	public void riseTiredness(int number) {
 		setTiredness(this.tiredness + number);
 
 	}
 
+	/**
+	 * rise the hunger level by "number"
+	 * @param number
+	 */
 	public void riseHungerLevel(int number) {
 
 		setHungerLevel(this.hungerLevel + number);
 	}
 
+	/**
+	 * decreases the hunger level by "number"
+	 * @param number
+	 */
 	public void decreasesHungerLevel(int number) {
 
 		setHungerLevel(this.hungerLevel - number);
@@ -414,21 +450,31 @@ public class Tamagotchi {
 		}
 	}
 
-	public void decreasesToiletDisire(int number) {
-		setToiletDesire(this.toiletDesire - number);
-	}
+	
 
+	/**
+	 * rise the number of health by "number"
+	 */
 	public void riseHealth(int number) {
 
 		setHealth(this.health + number);
 
 	}
 
+	/**
+	 * decreases the health by "number"
+	 * @param number
+	 */
 	public void decreasesHealth(int number) {
 		setHealth(this.health - number);
 
 	}
 
+	/**
+	 * this method allows to feed the tamagotchi
+	 * after having eaten the hunger decrease
+	 * and the dirty level, toilet desire and tiredness rise  
+	 */
 	public void eat() {
 
 		if (hungerLevel > 0 && this.toiletDesire < 50) {
@@ -454,6 +500,11 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * This method allow the tamagotchi to go to toilet
+	 * afet the toilet desire is set to 0
+	 * and the dirty level , hunger level and tiredness rise little
+	 */
 	public void goToToilet() {
 		if (this.toiletDesire >= 50) {
 			System.out.println(this.name + "\nest allé au toilet il n'a plus envie d'aller au toilet\n");
@@ -467,6 +518,10 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * This method allow the tamagotchi to rest 
+	 * this action rise his life, hunger level and toilet desire and set tiredness to 0
+	 */
 	public void rest() {
 
 		if (this.dirtLevel >= 60 || this.tiredness < 50 || this.toiletDesire >= 75 || this.hungerLevel >= 65) {
@@ -491,6 +546,9 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * Allow the tamagotchi express his mood
+	 */
 	public void expressMood() {
 
 		if (this.health < 5 || this.tiredness >= 70) {
@@ -503,6 +561,10 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * allow the tamagotchi to see his friends 
+	 * rise health, tiredness, toilet desire, dirty level, hungerLevel
+	 */
 	public void seeFriends() {
 
 		if (this.tiredness < 65 && this.toiletDesire < 50 && this.hungerLevel < 50 && this.dirtLevel < 40) {
@@ -527,6 +589,10 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * this method is to allow the tamagotchi to play sport
+	 * after that he is tired and dirty
+	 */
 	public void playSports() {
 		if (this.tiredness < 70 && this.toiletDesire < 65 && this.hungerLevel < 70) {
 			System.out.println(this.name + " viens de faire du sport  ");
@@ -547,16 +613,26 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * This method is to take off the mask
+	 */
 	public void takeOffMask() {
 		this.masked = false;
 		System.out.println("Votre tamagotchi a bien enlevé son masque");
 	}
 
+	/**
+	 * This method is to put the mask
+	 */
 	public void putMask() {
 		this.masked = true;
 		System.out.println("Votre tamagotchi a bien mis son masque");
 	}
 
+	/**
+	 * This method is to wash the tamagotchi 
+	 * the action set the dirty level to 0
+	 */
 	public void wash() {
 
 		if (this.toiletDesire < 50 && this.dirtLevel >= 30) {
@@ -576,6 +652,9 @@ public class Tamagotchi {
 
 	}
 
+	/**
+	 * This method allow the tamagotchi to smoke
+	 */
 	public void smok() {
 
 		System.out.println("\n" + this.name + " vient de fummer\n");
@@ -601,6 +680,9 @@ public class Tamagotchi {
 		System.exit(-1);
 	}
 
+	/**
+	 * This kill the tamagotchi
+	 */
 	public void die() {
 
 		setHealth(0);
