@@ -75,7 +75,18 @@ public class MainScript {
 
 				myTamagotchi.show();
 				gameMenu();
-				action = Clavier.lireInt(); // ask for the action to do
+				boolean askAgainAction ;
+				do {
+					askAgainAction = false;
+					action = Clavier.lireInt(); // ask for the action to do
+
+					if (action < 1 || action > 12) {
+						System.out.println("Choix incorrect veuiller entrer une action valide");
+						askAgainAction = true;
+					}
+
+				} while (askAgainAction);
+
 				switch (action) {
 				case 1: {
 					myTamagotchi.eat();
@@ -86,17 +97,7 @@ public class MainScript {
 					break;
 				}
 				case 3: {
-					boolean askAgain = false;
-					do {
-
-						System.out.println("Veuillez entrer la nouvel couleur des cheveux de votre tamagotchi");
-						String newHairColor = Clavier.lireString();
-						if ((newHairColor.toLowerCase()).equals("roux")) {
-							System.out.println("La couleur entrer est proscrite c'est haram !");
-						}
-						myTamagotchi.setHairColor(newHairColor);
-
-					} while (askAgain);
+					myTamagotchi.changeHairColor();
 
 					break;
 				}
@@ -143,13 +144,9 @@ public class MainScript {
 				case 11: {
 
 					if (nbOfTamagotchiInTable(listOfTamagotchi) < 10) {
-						System.out.println("Veuillez donner un nom à votre nouveau tamagotchi");
-						String newTamagotchiName = Clavier.lireString();
+						Tamagotchi myTamagotchiChild = myTamagotchi.reproduce();
 
-						Tamagotchi myTamagotchiChild = new Tamagotchi(newTamagotchiName, skinColor, hairColor,
-								tamagotchiType);
-
-						newtamago = reproduce(myTamagotchi, myTamagotchiChild);
+						newtamago = newTamaChosed(myTamagotchi, myTamagotchiChild);
 						if (newtamago) {
 							myTamagotchi = myTamagotchiChild;
 							myTamagotchi.setNbAction(0);
@@ -168,7 +165,8 @@ public class MainScript {
 					break;
 				}
 				default:
-					throw new IllegalArgumentException("Unexpected value: " + action);
+					System.out.println("Erreur de saisie");
+					;
 				}
 
 				myTamagotchi.decreasesNbAction(1);
@@ -216,11 +214,11 @@ public class MainScript {
 					continue;
 
 				}
-				
-				
+
 				if (nbOfTamagotchiInTable(listOfTamagotchi) > 0) { // add "and tamagotchi.health > 0
 
 					myTamagotchi = changeTamago(myTamagotchi);
+					System.out.println("Vous avez decider de continuer avec "+myTamagotchi.getName());
 				}
 			}
 
@@ -334,7 +332,7 @@ public class MainScript {
 	 * @param myTamagotchiChild
 	 * @return
 	 */
-	public static boolean reproduce(Tamagotchi myTamagotchi, Tamagotchi myTamagotchiChild) {
+	public static boolean newTamaChosed(Tamagotchi myTamagotchi, Tamagotchi myTamagotchiChild) {
 
 		boolean result = false;
 		Tamagotchi tamagotchiTemp = myTamagotchi;
