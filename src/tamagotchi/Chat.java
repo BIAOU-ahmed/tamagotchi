@@ -15,7 +15,7 @@ public class Chat extends Tamagotchi {
 	public Chat() {
 		super();
 		// TODO Auto-generated constructor stub
-		setTamagotchiType("Chat");
+		super.setTamagotchiType("Chat");
 		super.setHeight(15);
 		super.setHealth(HEALTHMAX);
 		super.setLifeExpectancy(4);
@@ -25,7 +25,7 @@ public class Chat extends Tamagotchi {
 	public Chat(String skinColor, String hairColor) {
 		super(skinColor,hairColor);
 		// TODO Auto-generated constructor stub
-		setTamagotchiType("Chat");
+		super.setTamagotchiType("Chat");
 		super.setHeight(15);
 		super.setHealth(HEALTHMAX);
 		super.setLifeExpectancy(4);

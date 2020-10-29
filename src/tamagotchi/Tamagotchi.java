@@ -787,9 +787,9 @@ public class Tamagotchi {
 		riseHungerLevel(20);
 
 		/*
-=======
+
 		decreasesHealth(2);
->>>>>>> 0ddacf5891efbfee8d0bd393e73e47339a037c52
+
 		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
 
 			riseToiletDesire(10);
@@ -806,7 +806,7 @@ public class Tamagotchi {
 
 
 abstract public Tamagotchi reproduce() ;
-
+/*
 	public Tamagotchi reproduce() {
 		System.out.println("Veuillez donner un nom à votre nouveau tamagotchi");
 		String newTamagotchiName = Clavier.lireString();
@@ -820,7 +820,7 @@ abstract public Tamagotchi reproduce() ;
 		return myTamagotchiChild;
 	}
 
-
+*/
 	/**
 	 * This kill the tamagotchi
 	 */

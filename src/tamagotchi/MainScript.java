@@ -94,7 +94,7 @@ public class MainScript {
 				myTamagotchi.gameMenu();
 				action = Clavier.lireInt(); // ask for the action to do
 
-				gameMenu();
+				myTamagotchi.gameMenu();
 				boolean askAgainAction ;
 				do {
 					askAgainAction = false;
@@ -169,9 +169,7 @@ public class MainScript {
 						
 						
 
-						Tamagotchi myTamagotchiChild = myTamagotchi.reproduce();
-
-						newtamago = newtamago(myTamagotchi, myTamagotchiChild);
+						
 
 						Tamagotchi myTamagotchiChild = myTamagotchi.reproduce();
 
@@ -345,7 +343,6 @@ public class MainScript {
 	 * @return
 	 */
 
-	public static boolean newtamago(Tamagotchi myTamagotchi, Tamagotchi myTamagotchiChild) {
 
 	public static boolean newTamaChosed(Tamagotchi myTamagotchi, Tamagotchi myTamagotchiChild) {
 
