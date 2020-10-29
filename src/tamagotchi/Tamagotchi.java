@@ -2,6 +2,31 @@ package tamagotchi;
 
 import outils.Clavier;
 
+
+public abstract class Tamagotchi {
+
+	String name;
+	String skinColor;
+	String hairColor;
+	String tamagotchiType;
+	boolean masked;
+	final int HEALTHMAXCAT = 10;
+	final int HEALTHMAXDRAGON = 20;
+	final int ACTIONMAX = 5;
+	int nbAction;
+	int dirtLevel = 0;
+	
+	int dayRemaining;
+	int height;
+	int health;
+	int lifeExpectancy;
+	int hungerLevel = 0;
+	int tiredness = 0;
+	int toiletDesire = 0;
+
+	/**
+	 * This method is the constructor he set the value of the new tamagotchi 
+=======
 public class Tamagotchi {
 
 	private final int HEALTHMAXCAT = 10;
@@ -29,18 +54,33 @@ public class Tamagotchi {
 	/**
 	 * This method is the constructor he set the value of the new tamagotchi
 	 * 
+>>>>>>> 0ddacf5891efbfee8d0bd393e73e47339a037c52
 	 * @param name
 	 * @param skinColor
 	 * @param hairColor
 	 * @param tamagotchiType
 	 */
-	public Tamagotchi(String name, String skinColor, String hairColor, String tamagotchiType) {
+	public Tamagotchi() {
 		// TODO Auto-generated constructor stub
-		setName(name);
-		setSkinColor(skinColor);
-		setHairColor(hairColor);
-		setTamagotchiType(tamagotchiType);
-		setHeight(height);
+		System.out.println("Veuillez entrer le nom de votre tamagotchi"); 
+		setName(Clavier.lireString());
+		System.out.println("Veuillez entrer la couleur de votre tamagotchi");
+		setSkinColor(Clavier.lireString());
+		System.out.println("Veuillez entrer la couleur du cheveu de votre tamagotchi");
+		setHairColor(Clavier.lireString());
+		
+		
+		
+		
+		/*
+		  String name  = Clavier.lireString();
+		  
+		  String
+		  skinColor = Clavier.lireString();
+		  
+		   
+		  String hairColor = Clavier.lireString(); int nbObligation = 0;
+		
 		if (tamagotchiType.equals("Dragon")) {
 
 			height = 35;
@@ -57,7 +97,28 @@ public class Tamagotchi {
 			dayRemaining = 4;
 			nbAction = 5;
 		}
+		*/
 	}
+	public Tamagotchi(String skinColor, String hairColor) {
+		// TODO Auto-generated constructor stub
+		System.out.println("Veuillez entrer le nom de votre tamagotchi"); 
+		setName(Clavier.lireString());
+		
+		setSkinColor(skinColor);
+		
+		setHairColor(hairColor);
+		
+
+	}
+
+
+	/**
+	 * @param lifeExpectancy the lifeExpectancy to set
+	 */
+	public void setLifeExpectancy(int lifeExpectancy) {
+		this.lifeExpectancy = lifeExpectancy;
+	}
+
 
 	/**
 	 * @return the aCTIONMAX
@@ -66,12 +127,6 @@ public class Tamagotchi {
 		return ACTIONMAX;
 	}
 
-	/**
-	 * @return the aCTIONMAXDRAGON
-	 */
-	public int getACTIONMAXDRAGON() {
-		return ACTIONMAXDRAGON;
-	}
 
 	/**
 	 * 
@@ -215,7 +270,7 @@ public class Tamagotchi {
 	 * @param health
 	 */
 	public void setHealth(int health) {
-
+/*
 		if (this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien")) {
 
 			if (health > 10) {
@@ -232,6 +287,8 @@ public class Tamagotchi {
 				System.out.println("\nAttention votre tamagotchi n'a plus beaucoup de vie\n");
 			}
 		}
+		*/
+		System.out.println("set supper");
 		this.health = health;
 		if (health <= 0) {
 			health = 0;
@@ -345,6 +402,27 @@ public class Tamagotchi {
 		}
 		this.toiletDesire = toiletDesire;
 	}
+	
+	/**
+	 * This function display the game menu
+	 */
+	public static void gameMenu() {
+		System.out.println("\nVoici le menu du jeu :");
+		System.out.println("1: pour faire manger votre tamagotchi");
+		System.out.println("2: pour le faire aller au toilet");
+		System.out.println("3: pour changer la couleur de ses cheveux");
+		System.out.println("4: pour qu'il se repose");
+		System.out.println("5: pour qu'il exprime son humeur");
+		System.out.println("6: pour qu'il voit ses amis");
+		System.out.println("7: pour qu'il fasse du sport");
+		System.out.println("8: pour qu'il enleve/mettre sont masques");
+		System.out.println("9: pour qu'il se lave");
+		System.out.println("10: pour le faire fumer");
+		System.out.println("11: pour qu'il se reproduise");
+		System.out.println("12: pour le tuer");
+	}
+
+	
 
 	/**
 	 * This method display the tamagotchi feature
@@ -387,7 +465,8 @@ public class Tamagotchi {
 	/**
 	 * rise the number of height by "number" depending on the tamagotchi type
 	 */
-	public void riseHeight() {
+	abstract public void riseHeight();
+	/*{
 
 		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
 
@@ -397,7 +476,7 @@ public class Tamagotchi {
 			setHeight(this.height + 5);
 		}
 	}
-
+*/
 	/**
 	 * rise the toilet desire
 	 * 
@@ -448,9 +527,9 @@ public class Tamagotchi {
 	 * 
 	 * @param number
 	 */
-	public void decreasesHungerLevel(int number) {
+	public void decreasesHungerLevel() {
 
-		setHungerLevel(this.hungerLevel - number);
+		//setHungerLevel(this.hungerLevel - number);
 
 		if (this.hungerLevel == 0) {
 			System.out.println("\nVotre tamagotchi a bien mangé il n'a plus faim\n");
@@ -488,6 +567,7 @@ public class Tamagotchi {
 
 		if (hungerLevel > 0 && this.toiletDesire < 50) {
 
+			/*
 			if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
 
 				decreasesHungerLevel(35);
@@ -496,7 +576,8 @@ public class Tamagotchi {
 
 				decreasesHungerLevel(25);
 			}
-
+*/
+			//decreasesHungerLevel();
 			riseDirtyLevel(5);
 			riseToiletDesire(15);
 			riseTiredness(5);
@@ -704,7 +785,11 @@ public class Tamagotchi {
 		System.out.println("\n" + this.name + " vient de fumer\n");
 		riseDirtyLevel(5);
 		riseHungerLevel(20);
+
+		/*
+=======
 		decreasesHealth(2);
+>>>>>>> 0ddacf5891efbfee8d0bd393e73e47339a037c52
 		if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
 
 			riseToiletDesire(10);
@@ -715,8 +800,12 @@ public class Tamagotchi {
 			riseToiletDesire(5);
 			riseTiredness(2);
 		}
+		*/
 
 	}
+
+
+abstract public Tamagotchi reproduce() ;
 
 	public Tamagotchi reproduce() {
 		System.out.println("Veuillez donner un nom à votre nouveau tamagotchi");
@@ -730,6 +819,7 @@ public class Tamagotchi {
 		
 		return myTamagotchiChild;
 	}
+
 
 	/**
 	 * This kill the tamagotchi

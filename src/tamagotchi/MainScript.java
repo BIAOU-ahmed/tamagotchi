@@ -23,34 +23,52 @@ public class MainScript {
 		// TODO Auto-generated method stub
 
 		int action;
-		String tamagotchiType;
+		int tamagotchiType;
 		boolean corectType = false;
 		boolean newtamago = false;
+		Tamagotchi myTamagotchi = null;
 		System.out.println("Bienvenue dans le jeu Tamagotchi !");
 
 		do {
 
+			corectType = true;
 			System.out.println("Veuillez entrer le type de votre tamagotchi parmi les suivantes :");
-			System.out.println("Chat Chien Dragon");
-			tamagotchiType = Clavier.lireString();
-			if (tamagotchiType.equals("Chat") || tamagotchiType.equals("Chien") || tamagotchiType.equals("Dragon")) {
-				corectType = true;
+			System.out.println("1-Chat\n2-Chien\n3-Dragon");
+			tamagotchiType = Clavier.lireInt();
+			switch (tamagotchiType) {
+			case 1: {
+				myTamagotchi = new Chat();
+				break;
 			}
+			case 2: {
+				myTamagotchi = new Chien();
+				break;
+			}
+			case 3: {
+				myTamagotchi = new Dragon();
+				break;
+			}
+			default:
+				System.out.println("error");
+				corectType = false;
+			}
+			
 
 		} while (corectType == false);
 
-		System.out.println("Veuillez entrer le nom de votre tamagotchi");
-		String name = Clavier.lireString();
-
-		System.out.println("Veuillez entrer la couleur de votre tamagotchi");
-		String skinColor = Clavier.lireString();
-
-		System.out.println("Veuillez entrer la couleur du cheveu de votre tamagotchi");
-		String hairColor = Clavier.lireString();
+		/*
+		 * System.out.println("Veuillez entrer le nom de votre tamagotchi"); String name
+		 * = Clavier.lireString();
+		 * 
+		 * System.out.println("Veuillez entrer la couleur de votre tamagotchi"); String
+		 * skinColor = Clavier.lireString();
+		 * 
+		 * System.out.println("Veuillez entrer la couleur du cheveu de votre tamagotchi"
+		 * ); String hairColor = Clavier.lireString(); int nbObligation = 0;
+		 * 
+		 * Tamagotchi myTamagotchi = new Chat(name, skinColor, hairColor);
+		 */
 		int nbObligation = 0;
-
-		Tamagotchi myTamagotchi = new Tamagotchi(name, skinColor, hairColor, tamagotchiType);
-
 		do {
 
 			newtamago = false;
@@ -60,11 +78,9 @@ public class MainScript {
 			/*
 			 * set the number of action according to the tamagotchi type
 			 */
-			if (tamagotchiType.equals("Chat") || tamagotchiType.equals("Chien")) {
-				myTamagotchi.setNbAction(myTamagotchi.getACTIONMAX());
-			} else if (tamagotchiType.equals("Dragon")) {
-				myTamagotchi.setNbAction(myTamagotchi.getACTIONMAXDRAGON());
-			}
+			
+			myTamagotchi.setNbAction(myTamagotchi.getACTIONMAX());
+			
 
 			/*
 			 * allow to play a day of the tamagotchi you chose the action and according to
@@ -74,6 +90,10 @@ public class MainScript {
 			do {
 
 				myTamagotchi.show();
+
+				myTamagotchi.gameMenu();
+				action = Clavier.lireInt(); // ask for the action to do
+
 				gameMenu();
 				boolean askAgainAction ;
 				do {
@@ -86,6 +106,7 @@ public class MainScript {
 					}
 
 				} while (askAgainAction);
+
 
 				switch (action) {
 				case 1: {
@@ -144,9 +165,18 @@ public class MainScript {
 				case 11: {
 
 					if (nbOfTamagotchiInTable(listOfTamagotchi) < 10) {
+
+						
+						
+
+						Tamagotchi myTamagotchiChild = myTamagotchi.reproduce();
+
+						newtamago = newtamago(myTamagotchi, myTamagotchiChild);
+
 						Tamagotchi myTamagotchiChild = myTamagotchi.reproduce();
 
 						newtamago = newTamaChosed(myTamagotchi, myTamagotchiChild);
+
 						if (newtamago) {
 							myTamagotchi = myTamagotchiChild;
 							myTamagotchi.setNbAction(0);
@@ -226,24 +256,6 @@ public class MainScript {
 
 	}
 
-	/**
-	 * This function display the game menu
-	 */
-	public static void gameMenu() {
-		System.out.println("\nVoici le menu du jeu :");
-		System.out.println("1: pour faire manger votre tamagotchi");
-		System.out.println("2: pour le faire aller au toilet");
-		System.out.println("3: pour changer la couleur de ses cheveux");
-		System.out.println("4: pour qu'il se repose");
-		System.out.println("5: pour qu'il exprime son humeur");
-		System.out.println("6: pour qu'il voit ses amis");
-		System.out.println("7: pour qu'il fasse du sport");
-		System.out.println("8: pour qu'il enleve/mettre sont masques");
-		System.out.println("9: pour qu'il se lave");
-		System.out.println("10: pour le faire fumer");
-		System.out.println("11: pour qu'il se reproduise");
-		System.out.println("12: pour le tuer");
-	}
 
 	/**
 	 * This function is to know the number of tamagotchi in the tamagotchi list
@@ -332,7 +344,11 @@ public class MainScript {
 	 * @param myTamagotchiChild
 	 * @return
 	 */
+
+	public static boolean newtamago(Tamagotchi myTamagotchi, Tamagotchi myTamagotchiChild) {
+
 	public static boolean newTamaChosed(Tamagotchi myTamagotchi, Tamagotchi myTamagotchiChild) {
+
 
 		boolean result = false;
 		Tamagotchi tamagotchiTemp = myTamagotchi;
