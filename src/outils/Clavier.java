@@ -79,8 +79,7 @@ public class Clavier {
             String ligne_lue = lireString();
             n = Integer.parseInt(ligne_lue);
         } catch (NumberFormatException err) {
-            System.out.println("*** Erreur de donnee ***");
-            System.exit(0);
+            
         }
         return n;
     }

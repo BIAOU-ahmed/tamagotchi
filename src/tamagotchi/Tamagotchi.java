@@ -26,7 +26,7 @@ public abstract class Tamagotchi {
 
 	/**
 	 * This method is the constructor he set the value of the new tamagotchi 
-=======
+
 public class Tamagotchi {
 
 	private final int HEALTHMAXCAT = 10;
@@ -54,7 +54,7 @@ public class Tamagotchi {
 	/**
 	 * This method is the constructor he set the value of the new tamagotchi
 	 * 
->>>>>>> 0ddacf5891efbfee8d0bd393e73e47339a037c52
+
 	 * @param name
 	 * @param skinColor
 	 * @param hairColor
@@ -64,10 +64,7 @@ public class Tamagotchi {
 		// TODO Auto-generated constructor stub
 		System.out.println("Veuillez entrer le nom de votre tamagotchi"); 
 		setName(Clavier.lireString());
-		System.out.println("Veuillez entrer la couleur de votre tamagotchi");
-		setSkinColor(Clavier.lireString());
-		System.out.println("Veuillez entrer la couleur du cheveu de votre tamagotchi");
-		setHairColor(Clavier.lireString());
+		
 		
 		
 		
@@ -406,7 +403,7 @@ public class Tamagotchi {
 	/**
 	 * This function display the game menu
 	 */
-	public static void gameMenu() {
+	public void gameMenu() {
 		System.out.println("\nVoici le menu du jeu :");
 		System.out.println("1: pour faire manger votre tamagotchi");
 		System.out.println("2: pour le faire aller au toilet");

@@ -92,9 +92,9 @@ public class MainScript {
 				myTamagotchi.show();
 
 				myTamagotchi.gameMenu();
-				action = Clavier.lireInt(); // ask for the action to do
+				
 
-				myTamagotchi.gameMenu();
+				
 				boolean askAgainAction ;
 				do {
 					askAgainAction = false;
@@ -194,7 +194,7 @@ public class MainScript {
 				}
 				default:
 					System.out.println("Erreur de saisie");
-					;
+					
 				}
 
 				myTamagotchi.decreasesNbAction(1);

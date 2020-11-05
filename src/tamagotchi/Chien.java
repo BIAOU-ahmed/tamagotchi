@@ -14,7 +14,7 @@ public class Chien extends Tamagotchi {
 	public Chien() {
 		super();
 		// TODO Auto-generated constructor stub
-		setTamagotchiType("Chient");
+		setTamagotchiType("Chien");
 		super.setHeight(15);
 		super.setHealth(HEALTHMAX);
 		super.setLifeExpectancy(4);
