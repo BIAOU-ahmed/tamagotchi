@@ -405,6 +405,7 @@ public class Tamagotchi {
 	 */
 	public void gameMenu() {
 		System.out.println("\nVoici le menu du jeu :");
+		System.out.println("0: Les caracteristique");
 		System.out.println("1: pour faire manger votre tamagotchi");
 		System.out.println("2: pour le faire aller au toilet");
 		System.out.println("3: pour changer la couleur de ses cheveux");
@@ -562,7 +563,7 @@ public class Tamagotchi {
 	 */
 	public void eat() {
 
-		if (hungerLevel > 0 && this.toiletDesire < 50) {
+		if (hungerLevel > 0 && this.toiletDesire < 90) {
 
 			/*
 			if ((this.tamagotchiType.equals("Chat") || this.tamagotchiType.equals("Chien"))) {
@@ -578,7 +579,8 @@ public class Tamagotchi {
 			riseDirtyLevel(5);
 			riseToiletDesire(15);
 			riseTiredness(5);
-		} else if (this.toiletDesire >= 50) {
+			decreasesNbAction(1);
+		} else if (this.toiletDesire >= 90) {
 			System.out.println(
 					"\nVotre tamagotchi a trop envie d'aller au toilet pour manger il risque de se faire dessus\n");
 		} else {
@@ -592,12 +594,13 @@ public class Tamagotchi {
 	 * set to 0 and the dirty level , hunger level and tiredness rise little
 	 */
 	public void goToToilet() {
-		if (this.toiletDesire >= 50) {
+		if (this.toiletDesire >= 80) {
 			System.out.println(this.name + "\nest allé au toilet il n'a plus envie d'aller au toilet\n");
 			setToiletDesire(0);
 			riseDirtyLevel(5);
 			riseHungerLevel(5);
 			riseTiredness(3);
+			decreasesNbAction(1);
 		} else {
 			System.out.println("\nVotre tamagotchi n'a pas envie d'aller au toilet\n");
 		}
@@ -608,24 +611,13 @@ public class Tamagotchi {
 	 * This method change the tamagotchis hair color
 	 */
 	public void changeHairColor() {
-		boolean askAgain;
-		do {
+		
 
-			askAgain = false;
-			System.out.println("Veuillez entrer la nouvel couleur des cheveux de votre tamagotchi");
-			String newHairColor = Clavier.lireString();
-			if ((newHairColor.toLowerCase()).equals("roux")) {
-				System.out.println("La couleur entrer est proscrite c'est haram !");
-				askAgain = true;
-			}
-			setHairColor(newHairColor);
-
-		} while (askAgain);
-
-		riseTiredness(3);
-		riseHungerLevel(5);
-		riseDirtyLevel(5);
-		riseToiletDesire(5);
+		riseTiredness(1);
+		riseHungerLevel(2);
+		riseDirtyLevel(2);
+		riseToiletDesire(2);
+		decreasesNbAction(1);
 	}
 
 	/**
@@ -636,13 +628,13 @@ public class Tamagotchi {
 
 		if (this.dirtLevel >= 60 || this.tiredness < 50 || this.toiletDesire >= 75 || this.hungerLevel >= 65) {
 
-			if (this.dirtLevel >= 60) {
+			if (this.dirtLevel >= 80) {
 				System.out.println("\nVotre tamagotchi est trop sale pour se reposer");
 			} else if (this.tiredness < 50) {
 				System.out.println("\nVotre tamagotchi n'est pas assez fatigué pour se reposer");
-			} else if (this.toiletDesire >= 75) {
+			} else if (this.toiletDesire >= 90) {
 				System.out.println("\nVotre tamagotchi est trop envie d'aller au toilet pour se reposer");
-			} else if (this.hungerLevel >= 65) {
+			} else if (this.hungerLevel >= 95) {
 				System.out.println("\nVotre tamagotchi a trop faim pour se reposer");
 			}
 
@@ -652,6 +644,7 @@ public class Tamagotchi {
 			setTiredness(0);
 			riseHungerLevel(15);
 			riseToiletDesire(10);
+			decreasesNbAction(1);
 		}
 
 	}
@@ -674,6 +667,7 @@ public class Tamagotchi {
 		riseHungerLevel(5);
 		riseDirtyLevel(5);
 		riseToiletDesire(5);
+		decreasesNbAction(1);
 	}
 
 	/**
@@ -682,24 +676,23 @@ public class Tamagotchi {
 	 */
 	public void seeFriends() {
 
-		if (this.tiredness < 65 && this.toiletDesire < 50 && this.hungerLevel < 50 && this.dirtLevel < 40) {
+		if (this.tiredness < 75 && this.toiletDesire < 70  && this.dirtLevel < 60) {
 			System.out.println("\n" + this.name + " est content d'avoir rendu visite à un ami\n");
 			riseHealth(1);
 			riseTiredness(20);
 			riseToiletDesire(10);
 			riseDirtyLevel(30);
 			riseHungerLevel(20);
+			decreasesNbAction(1);
 		} else {
 
-			if (this.dirtLevel >= 40) {
+			if (this.dirtLevel >= 60) {
 				System.out.println("\nVotre tamagotchi est trop sale pour rendre visite à ses amis");
-			} else if (this.tiredness >= 65) {
+			} else if (this.tiredness >= 75) {
 				System.out.println("\nLe tamagotchi est trop fatigué pour rendre visite à un ami\n ");
-			} else if (this.toiletDesire >= 50) {
+			} else if (this.toiletDesire >= 70) {
 				System.out.println("\nVotre tamagotchi a trop envie d'aller au toilet pour rendre visite à un ami");
-			} else if (this.hungerLevel >= 50) {
-				System.out.println("\nVotre tamagotchi a trop faim pour rendre visite à un ami");
-			}
+			} 
 		}
 
 	}
@@ -712,10 +705,11 @@ public class Tamagotchi {
 		if (this.tiredness < 70 && this.toiletDesire < 65 && this.hungerLevel < 70) {
 			System.out.println(this.name + " viens de faire du sport  ");
 			riseHealth(2);
-			riseTiredness(60);
-			riseDirtyLevel(60);
+			riseTiredness(30);
+			riseDirtyLevel(40);
 			riseHungerLevel(15);
 			riseToiletDesire(5);
+			decreasesNbAction(1);
 		} else {
 			if (this.tiredness >= 70) {
 				System.out.println("\nVotre tamagotchi est trop fatigué pour faire du sport\n");
@@ -734,10 +728,11 @@ public class Tamagotchi {
 	public void takeOffMask() {
 		this.masked = false;
 		System.out.println("Votre tamagotchi a bien enlevé son masque");
-		riseTiredness(3);
-		riseHungerLevel(5);
-		riseDirtyLevel(5);
-		riseToiletDesire(5);
+		riseTiredness(1);
+		riseHungerLevel(1);
+		riseDirtyLevel(1);
+		riseToiletDesire(1);
+		decreasesNbAction(1);
 	}
 
 	/**
@@ -746,10 +741,11 @@ public class Tamagotchi {
 	public void putMask() {
 		this.masked = true;
 		System.out.println("Votre tamagotchi a bien mis son masque");
-		riseTiredness(3);
-		riseHungerLevel(5);
-		riseDirtyLevel(5);
-		riseToiletDesire(5);
+		riseTiredness(1);
+		riseHungerLevel(1);
+		riseDirtyLevel(1);
+		riseToiletDesire(1);
+		decreasesNbAction(1);
 	}
 
 	/**
@@ -761,6 +757,7 @@ public class Tamagotchi {
 			System.out.println("\n" + this.name + " cc'est bien laver il est tout propre :)\n");
 			setDirtLevel(0);
 			riseTiredness(2);
+			decreasesNbAction(1);
 		} else {
 
 			if (this.dirtLevel < 30) {
@@ -782,6 +779,7 @@ public class Tamagotchi {
 		System.out.println("\n" + this.name + " vient de fumer\n");
 		riseDirtyLevel(5);
 		riseHungerLevel(20);
+		decreasesNbAction(1);
 
 		/*
 

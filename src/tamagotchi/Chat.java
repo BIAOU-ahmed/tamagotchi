@@ -18,9 +18,8 @@ public class Chat extends Tamagotchi {
 		super();
 		// TODO Auto-generated constructor stub
 
-		choiceColor();
-		System.out.println("Veuillez entrer la couleur du cheveu de votre tamagotchi");
-		setHairColor(Clavier.lireString());
+		choiceSkinColor();
+		choiceHairColor();
 
 		super.setTamagotchiType("Chat");
 		super.setHeight(15);
@@ -28,6 +27,7 @@ public class Chat extends Tamagotchi {
 		super.setLifeExpectancy(4);
 		super.setDayRemaining(4);
 		super.setNbAction(5);
+		super.show();
 	}
 
 	public Chat(String skinColor, String hairColor) {
@@ -58,9 +58,14 @@ public class Chat extends Tamagotchi {
 		super.eat();
 	}
 
+	
+	public void changeHairColor() {
+		choiceHairColor();
+		super.changeHairColor();
+	}
 	public Tamagotchi reproduce() {
 		Tamagotchi myTamagotchiChild = new Chat(getSkinColor(), getHairColor());
-
+		decreasesNbAction(1);
 		return myTamagotchiChild;
 	}
 
@@ -82,10 +87,10 @@ public class Chat extends Tamagotchi {
 
 	}
 
-	private void choiceColor() {
+	private void choiceSkinColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur de votre tamagotchi parmi les suivantes");
-		System.out.println("1) Blanc \n2) Noir \n3)Gris \n4) Gris Noir\n5)Blanc Noir");
+		System.out.println("1) Blanc \n2) Noir \n3)Gris \n4) Gris Noir\n5) Blanc Noir");
 		
 			choice = Clavier.lireInt();
 
@@ -113,7 +118,37 @@ public class Chat extends Tamagotchi {
 			
 			default:
 				System.out.println("Erreur de saisie");
-				choiceColor();
+				choiceSkinColor();
+			}
+
+		
+	}
+	
+	private void choiceHairColor() {
+		int choice;
+		System.out.println("Veuillez entrer la couleur des cheuveux de votre tamagotchi parmi les suivantes");
+		System.out.println("1) Blanc \n2) Noir \n3) Gris ");
+		
+			choice = Clavier.lireInt();
+
+			switch (choice) {
+			case 1: {
+				setHairColor("Blanc");
+				break;
+			}
+			case 2: {
+				setHairColor("Noir");
+				break;
+			}
+			case 3: {
+				setHairColor("Gris");
+				break;
+			}
+		
+			
+			default:
+				System.out.println("Erreur de saisie");
+				choiceHairColor();
 			}
 
 		
