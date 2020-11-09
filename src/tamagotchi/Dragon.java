@@ -15,6 +15,11 @@ public class Dragon extends Tamagotchi {
 	private final int LIFE_EXPECTANCY = 20 ;
 	private final int MAX_ACTION = 15 ;
 
+	
+	/**
+	 * This method is the constructor he set the value of the new Dragon
+	 * 
+	 */
 	public Dragon() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,6 +35,12 @@ public class Dragon extends Tamagotchi {
 		super.show();
 	}
 
+	/**
+	 * This method is the constructor he set the value of the new Dragon
+	 * 
+	 * @param skinColor
+	 * @param hairColor
+	 */
 	public Dragon(String skinColor, String hairColor) {
 		super(skinColor, hairColor);
 		// TODO Auto-generated constructor stub
@@ -56,30 +67,51 @@ public class Dragon extends Tamagotchi {
 		return LIFE_EXPECTANCY;
 	}
 
+	
+	/**
+	 * rise the number of height by "number" depending on the tamagotchi type
+	 */
 	public void riseHeight() {
-		super.setHeight(super.getHeight() + 2);
+		super.setHeight(super.getHeight() + 25);
 	}
 
 
+	
+	/**
+	 * this method allows to feed the tamagotchi after having eaten the hunger
+	 * decrease and the dirty level, toilet desire and tiredness rise
+	 */
+	public void eat() {
+		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 90) {
+			chooseMeal();
+		}
+		super.eat();
+	}
+	
 
+	/**
+	 * This method is just to change the tamagotchi's hair color
+	 */
 	public void changeHairColor() {
 		chooseHairColor();
 		super.changeHairColor();
 	}
 
-	public void eat() {
-		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 50) {
-			chooseMeal();
-		}
-		super.eat();
-	}
 
+
+	/**
+	 * This method create a new tamagotchi who can be used by the user if he want to change tamagotchi
+	 */
 	public Tamagotchi reproduce() {
-		Tamagotchi myTamagotchiChild = new Chat(getSkinColor(), getHairColor());
+		Tamagotchi myTamagotchiChild = new Cat(getSkinColor(), getHairColor());
 		decreasesNbAction(1);
 		return myTamagotchiChild;
 	}
 
+	
+	/**
+	 * This method is to allow the tamagotchi to smok
+	 */
 	public void smok() {
 		super.smok();
 		decreasesHealth(1);
@@ -87,6 +119,11 @@ public class Dragon extends Tamagotchi {
 		riseTiredness(2);
 	}
 
+	
+	/**
+	 * 
+	 * @param height
+	 */
 	public void setHealth(int health) {
 		
 		if (health > HEALTHMAX) {
@@ -98,6 +135,9 @@ public class Dragon extends Tamagotchi {
 
 	}
 
+	/**
+	 * This method allow the user to choose the tamagotchi skin color
+	 */
 	protected void chooseSkinColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur de votre tamagotchi parmi les suivantes");
@@ -126,6 +166,10 @@ public class Dragon extends Tamagotchi {
 
 	}
 
+	
+	/**
+	 * This method allow the user to choose the tamagotchi hair color
+	 */
 	protected void chooseHairColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur des cheuveux de votre tamagotchi parmi les suivantes");
@@ -154,6 +198,10 @@ public class Dragon extends Tamagotchi {
 
 	}
 
+	
+	/**
+	 * This method allow the user to choose the meal for the tamagotchi
+	 */
 	protected void chooseMeal() {
 
 		int choice;

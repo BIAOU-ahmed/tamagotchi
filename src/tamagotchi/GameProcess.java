@@ -10,21 +10,22 @@ import outils.Clavier;
  *
  */
 public class GameProcess {
-	
-	
-	public static void typeChoice() {
 
-		
+	/**
+	 * This metod allox the user to choose the type of the new tamagotchi
+	 */
+	public static void chooseType() {
+
 		System.out.println("Veuillez entrer le type de votre tamagotchi parmi les suivantes :");
 		System.out.println("1-Chat\n2-Chien\n3-Dragon");
 		int tamagotchiType = Clavier.lireInt();
 		switch (tamagotchiType) {
 		case 1: {
-			MainScript.myTamagotchi = new Chat();
+			MainScript.myTamagotchi = new Cat();
 			break;
 		}
 		case 2: {
-			MainScript.myTamagotchi = new Chien();
+			MainScript.myTamagotchi = new Dog();
 			break;
 		}
 		case 3: {
@@ -33,14 +34,14 @@ public class GameProcess {
 		}
 		default:
 			System.out.println("error");
-			typeChoice();
+			chooseType();
 		}
 	}
-	
+
 	/**
+	 * 
 	 * This function is to know the number of tamagotchi in the tamagotchi list
 	 * 
-	 * @param tab
 	 * @return the number of tamagotchi
 	 */
 	public static int nbOfTamagotchiInTable() {
@@ -58,9 +59,9 @@ public class GameProcess {
 	}
 
 	/**
-	 * Display the tamagotchis in the table
 	 * 
-	 * @param tab
+	 * Display the tamagotchis in the table
+	 *
 	 */
 	public static void displayTamagotchiInTable() {
 
@@ -68,7 +69,8 @@ public class GameProcess {
 		for (int i = 0; i < MainScript.listOfTamagotchi.length; i++) {
 			if (MainScript.listOfTamagotchi[i] != null) {
 
-				System.out.println((i + 1) + ": Nom: " + MainScript.listOfTamagotchi[i].getName() + " Type: " + MainScript.listOfTamagotchi[i].getTamagotchiType());
+				System.out.println((i + 1) + ": Nom: " + MainScript.listOfTamagotchi[i].getName() + " Type: "
+						+ MainScript.listOfTamagotchi[i].getTamagotchiType());
 
 			}
 		}
@@ -79,7 +81,6 @@ public class GameProcess {
 	 * this part ask for change of tamagotchi if you change the current is put in
 	 * the table
 	 * 
-	 * @param myTamagotchi
 	 * @return the new tamagotchi
 	 */
 	public static Tamagotchi changeTamago() {
@@ -120,14 +121,11 @@ public class GameProcess {
 	 * this part create a new tamagotchi who's add to the table if the user chose to
 	 * not take the new tamagotchi
 	 * 
-	 * @param myTamagotchi
 	 * @param myTamagotchiChild
-	 * @return
+	 * @return true if the user choose to continue with the new tamagotchi or false
+	 *         if not
 	 */
-
-
 	public static boolean newTamaChosed(Tamagotchi myTamagotchiChild) {
-
 
 		boolean result = false;
 		Tamagotchi tamagotchiTemp = MainScript.myTamagotchi;
@@ -158,21 +156,22 @@ public class GameProcess {
 		return result;
 
 	}
-	
+
 	public static void spacing() {
 		for (int i = 0; i < 300; i++) {
 			System.out.println();
 		}
 	}
-	
-	public static void gameAction() {
-		
-		int action;
-		
-		
-			action = Clavier.lireInt(); // ask for the action to do
 
-		
+	/**
+	 * This function allow the user to choose the action he want to do
+	 */
+	public static void gameAction() {
+
+		int action;
+
+		action = Clavier.lireInt(); // ask for the action to do
+
 		switch (action) {
 		case 0: {
 			MainScript.myTamagotchi.show();
@@ -235,19 +234,16 @@ public class GameProcess {
 
 			if (nbOfTamagotchiInTable() < 10) {
 
-				
-
 				Tamagotchi myTamagotchiChild = MainScript.myTamagotchi.reproduce();
 
 				MainScript.newtamago = newTamaChosed(myTamagotchiChild);
 
 				if (MainScript.newtamago) {
 					MainScript.myTamagotchi = myTamagotchiChild;
-					MainScript.playing=false;
+					MainScript.playing = false;
 				}
 			} else {
-				System.out.println(
-						"Impossible de se reproduire vous avez ateint le nombre maximum de tamagotchi");
+				System.out.println("Impossible de se reproduire vous avez ateint le nombre maximum de tamagotchi");
 			}
 
 			break;
@@ -261,22 +257,28 @@ public class GameProcess {
 		default:
 			System.out.println("Choix incorrect veuiller entrer une action valide");
 			gameAction();
-			
-			
+
 		}
-		
-		if(MainScript.myTamagotchi.getNbAction()<=0) {
-			MainScript.playing=false;
+
+		if (MainScript.myTamagotchi.getNbAction() <= 0) {
+			MainScript.playing = false;
 		}
-		
+
 	}
-	
-	
+
+	/**
+	 * This is for the end of action we verifie if the tamagotchi still live if not
+	 * and the user have other tamagotchi we choose a new tamagotchi for him but if
+	 * not the game is over but if the tamagotchi is live and we have other
+	 * tamagotchi we ask if he want to change tamagotchi or not the user if he want
+	 * to change
+	 */
 	public static void endGame() {
-		
+
 		if (!MainScript.newtamago) {
 			if (MainScript.myTamagotchi.getDirtLevel() == 100 || MainScript.myTamagotchi.getTiredness() == 100
-					|| MainScript.myTamagotchi.getHungerLevel() == 100 || MainScript.myTamagotchi.getToiletDesire() == 100) {
+					|| MainScript.myTamagotchi.getHungerLevel() == 100
+					|| MainScript.myTamagotchi.getToiletDesire() == 100) {
 
 				MainScript.nbObligation++;
 			}
@@ -313,14 +315,12 @@ public class GameProcess {
 					}
 				}
 
-				
-
 			}
 
 			if (nbOfTamagotchiInTable() > 0) { // add "and tamagotchi.health > 0
 
 				MainScript.myTamagotchi = changeTamago();
-				System.out.println("Vous avez decider de continuer avec "+MainScript.myTamagotchi.getName());
+				System.out.println("Vous avez decider de continuer avec " + MainScript.myTamagotchi.getName());
 			}
 		}
 	}

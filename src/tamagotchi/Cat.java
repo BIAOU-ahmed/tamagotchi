@@ -9,13 +9,19 @@ import outils.Clavier;
  * @author ahmed
  *
  */
-public class Chat extends Tamagotchi {
+public class Cat extends Tamagotchi {
 
 	private final int HEALTHMAX = 10;
 	private final int LIFE_EXPECTANCY = 5 ;
 	private final int MAX_ACTION = 5 ;
 
-	public Chat() {
+	
+	
+	/**
+	 * This method is the constructor he set the value of the new Cat
+	 * 
+	 */
+	public Cat() {
 		super();
 		// TODO Auto-generated constructor stub
 
@@ -31,7 +37,13 @@ public class Chat extends Tamagotchi {
 		super.show();
 	}
 
-	public Chat(String skinColor, String hairColor) {
+	/**
+	 * This method is the constructor he set the value of the new Cat
+	 * @param skinColor
+	 * @param hairColor
+	 */
+	
+	public Cat(String skinColor, String hairColor) {
 		super(skinColor, hairColor);
 		// TODO Auto-generated constructor stub
 		super.setTamagotchiType("Chat");
@@ -58,29 +70,45 @@ public class Chat extends Tamagotchi {
 		return LIFE_EXPECTANCY;
 	}
 
+	/**
+	 * rise the number of height by "number" depending on the tamagotchi type
+	 */
 	public void riseHeight() {
 		super.setHeight(super.getHeight() + 2);
 	}
 
 
+	/**
+	 * this method allows to feed the tamagotchi after having eaten the hunger
+	 * decrease and the dirty level, toilet desire and tiredness rise
+	 */
 	public void eat() {
-		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 50) {
+		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 90) {
 			chooseMeal();
 		}
 		super.eat();
 	}
 
-	
+	/**
+	 * This method is just to change the tamagotchi's hair color
+	 */
 	public void changeHairColor() {
 		chooseHairColor();
 		super.changeHairColor();
 	}
+	
+	/**
+	 * This method create a new tamagotchi who can be used by the user if he want to change tamagotchi
+	 */
 	public Tamagotchi reproduce() {
-		Tamagotchi myTamagotchiChild = new Chat(getSkinColor(), getHairColor());
+		Tamagotchi myTamagotchiChild = new Cat(getSkinColor(), getHairColor());
 		decreasesNbAction(1);
 		return myTamagotchiChild;
 	}
 
+	/**
+	 * This method is to allow the tamagotchi to smok
+	 */
 	public void smok() {
 		super.smok();
 		decreasesHealth(5);
@@ -88,6 +116,10 @@ public class Chat extends Tamagotchi {
 		riseTiredness(5);
 	}
 
+	/**
+	 * 
+	 * @param height
+	 */
 	public void setHealth(int health) {
 		System.out.println("set child");
 		if (health > 10) {
@@ -99,6 +131,10 @@ public class Chat extends Tamagotchi {
 
 	}
 
+	
+	/**
+	 * This method allow the user to choose the tamagotchi skin color
+	 */
 	protected void chooseSkinColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur de votre tamagotchi parmi les suivantes");
@@ -136,6 +172,10 @@ public class Chat extends Tamagotchi {
 		
 	}
 	
+	
+	/**
+	 * This method allow the user to choose the tamagotchi hair color
+	 */
 	protected void chooseHairColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur des cheuveux de votre tamagotchi parmi les suivantes");
@@ -166,6 +206,9 @@ public class Chat extends Tamagotchi {
 		
 	}
 	
+	/**
+	 * This method allow the user to choose the meal for the tamagotchi
+	 */
 	protected void chooseMeal() {
 		
 		int choice;

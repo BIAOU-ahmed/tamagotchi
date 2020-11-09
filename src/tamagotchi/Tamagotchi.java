@@ -24,11 +24,6 @@ public abstract class Tamagotchi {
 	/**
 	 * This method is the constructor he set the value of the new tamagotchi
 	 * 
-	 * 
-	 * @param name
-	 * @param skinColor
-	 * @param hairColor
-	 * @param tamagotchiType
 	 */
 	public Tamagotchi() {
 		// TODO Auto-generated constructor stub
@@ -378,7 +373,7 @@ public abstract class Tamagotchi {
 	}
 
 	/**
-	 * rise the number of height by "number" depending on the tamagotchi type
+	 * abstract function to to rise the tamagotchi's height
 	 */
 	abstract public void riseHeight();
 
@@ -683,12 +678,24 @@ public abstract class Tamagotchi {
 
 	}
 
+	/**
+	 * This method allow the user to choose the tamagotchi skin color
+	 */
 	abstract protected void chooseSkinColor();
 
+	/**
+	 * This method allow the user to choose the tamagotchi hair color
+	 */
 	abstract protected void chooseHairColor();
 
+	/**
+	 * This method allow the user to choose the meal for the tamagotchi
+	 */
 	abstract protected void chooseMeal();
 
+	/**
+	 * This method create a new tamagotchi who can be used by the user if he want to change tamagotchi
+	 */
 	abstract public Tamagotchi reproduce();
 
 	/**

@@ -29,7 +29,7 @@ public class MainScript {
 		
 		System.out.println("Bienvenue dans le jeu Tamagotchi !");
 
-		GameProcess.typeChoice();
+		GameProcess.chooseType();
 
 	
 		
