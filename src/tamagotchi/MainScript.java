@@ -37,13 +37,13 @@ public class MainScript {
 
 			newtamago = false;
 			System.out.println("\nBonjour début du jour "
-					+ ((myTamagotchi.getLifeExpectancy() - myTamagotchi.getDayRemaining()) + 1));
+					+ ((myTamagotchi.getLIFE_EXPECTANCY() - myTamagotchi.getDayRemaining()) + 1));
 
 			/*
 			 * set the number of action according to the tamagotchi type
 			 */
 			if(myTamagotchi.getNbAction()==0) {
-				myTamagotchi.setNbAction(myTamagotchi.getACTIONMAX());
+				myTamagotchi.setNbAction(myTamagotchi.getMAX_ACTION());
 			}
 			
 			
@@ -64,7 +64,6 @@ public class MainScript {
 				GameProcess.gameAction();
 				
 
-				
 			
 			} while (playing);
 

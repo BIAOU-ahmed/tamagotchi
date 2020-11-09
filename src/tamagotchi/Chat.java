@@ -12,21 +12,22 @@ import outils.Clavier;
 public class Chat extends Tamagotchi {
 
 	private final int HEALTHMAX = 10;
-	final int ACTIONMAX = 5;
+	private final int LIFE_EXPECTANCY = 5 ;
+	private final int MAX_ACTION = 5 ;
 
 	public Chat() {
 		super();
 		// TODO Auto-generated constructor stub
 
-		choiceSkinColor();
-		choiceHairColor();
+		chooseSkinColor();
+		chooseHairColor();
 
 		super.setTamagotchiType("Chat");
-		super.setHeight(15);
+		super.setHeight(10);
 		super.setHealth(HEALTHMAX);
-		super.setLifeExpectancy(4);
-		super.setDayRemaining(4);
-		super.setNbAction(5);
+		super.setDayRemaining(LIFE_EXPECTANCY);
+		super.setNbAction(MAX_ACTION);
+		System.out.println(nbAction);
 		super.show();
 	}
 
@@ -34,33 +35,44 @@ public class Chat extends Tamagotchi {
 		super(skinColor, hairColor);
 		// TODO Auto-generated constructor stub
 		super.setTamagotchiType("Chat");
-		super.setHeight(15);
+		super.setHeight(10);
 		super.setHealth(HEALTHMAX);
-		super.setLifeExpectancy(4);
-		super.setDayRemaining(4);
-		super.setNbAction(5);
+		super.setDayRemaining(LIFE_EXPECTANCY);
+		super.setNbAction(MAX_ACTION);
+	}
+	
+	
+
+
+	/**
+	 * @return the mAX_ACTION
+	 */
+	public int getMAX_ACTION() {
+		return MAX_ACTION;
+	}
+
+	/**
+	 * @return the lIFE_EXPECTANCY
+	 */
+	public int getLIFE_EXPECTANCY() {
+		return LIFE_EXPECTANCY;
 	}
 
 	public void riseHeight() {
 		super.setHeight(super.getHeight() + 2);
 	}
 
-	public void decreasesHungerLevel() {
-
-		setHungerLevel(this.hungerLevel - 35);
-		super.decreasesHungerLevel();
-	}
 
 	public void eat() {
 		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 50) {
-			decreasesHungerLevel();
+			chooseMeal();
 		}
 		super.eat();
 	}
 
 	
 	public void changeHairColor() {
-		choiceHairColor();
+		chooseHairColor();
 		super.changeHairColor();
 	}
 	public Tamagotchi reproduce() {
@@ -87,7 +99,7 @@ public class Chat extends Tamagotchi {
 
 	}
 
-	private void choiceSkinColor() {
+	protected void chooseSkinColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur de votre tamagotchi parmi les suivantes");
 		System.out.println("1) Blanc \n2) Noir \n3)Gris \n4) Gris Noir\n5) Blanc Noir");
@@ -118,13 +130,13 @@ public class Chat extends Tamagotchi {
 			
 			default:
 				System.out.println("Erreur de saisie");
-				choiceSkinColor();
+				chooseSkinColor();
 			}
 
 		
 	}
 	
-	private void choiceHairColor() {
+	protected void chooseHairColor() {
 		int choice;
 		System.out.println("Veuillez entrer la couleur des cheuveux de votre tamagotchi parmi les suivantes");
 		System.out.println("1) Blanc \n2) Noir \n3) Gris ");
@@ -148,10 +160,34 @@ public class Chat extends Tamagotchi {
 			
 			default:
 				System.out.println("Erreur de saisie");
-				choiceHairColor();
+				chooseHairColor();
 			}
 
 		
+	}
+	
+	protected void chooseMeal() {
+		
+		int choice;
+		System.out.println("Veuillez choisir la nouritures que vous souhaitez :");
+		System.out.println("1) Croquete pour chat \n2) souris ");
+		
+			choice = Clavier.lireInt();
+
+			switch (choice) {
+			case 1: {
+				decreasesHungerLevel(35);
+				break;
+			}
+			case 2: {
+				decreasesHungerLevel(100);
+				break;
+			}
+			default:
+				System.out.println("Erreur de saisie");
+				chooseMeal();
+			}
+			
 	}
 
 }
