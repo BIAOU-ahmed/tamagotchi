@@ -9,14 +9,14 @@ public abstract class Tamagotchi {
 	protected String hairColor;
 	protected String tamagotchiType;
 	protected boolean masked;
-	
+
 	protected int nbAction;
 	protected int dirtLevel = 0;
 
 	protected int dayRemaining;
 	protected int height;
 	protected int health;
-	
+
 	protected int hungerLevel = 0;
 	protected int tiredness = 0;
 	protected int toiletDesire = 0;
@@ -29,7 +29,6 @@ public abstract class Tamagotchi {
 		// TODO Auto-generated constructor stub
 		System.out.println("Veuillez entrer le nom de votre tamagotchi");
 		setName(Clavier.lireString());
-		
 
 	}
 
@@ -50,14 +49,16 @@ public abstract class Tamagotchi {
 
 	}
 
-
-
-	
-
 	/**
 	 * @return the mAX_ACTION
 	 */
 	abstract public int getMAX_ACTION();
+
+	/**
+	 * 
+	 * @return
+	 */
+	abstract public int getLIFE_EXPECTANCY();
 
 	/**
 	 * 
@@ -155,6 +156,14 @@ public abstract class Tamagotchi {
 
 	/**
 	 * 
+	 * @return
+	 */
+	public int getTiredness() {
+		return tiredness;
+	}
+
+	/**
+	 * 
 	 * @param tiredness
 	 */
 	public void setTiredness(int tiredness) {
@@ -217,12 +226,6 @@ public abstract class Tamagotchi {
 	 * 
 	 * @return
 	 */
-	abstract public int getLIFE_EXPECTANCY() ;
-
-	/**
-	 * 
-	 * @return
-	 */
 	public int getHungerLevel() {
 		return hungerLevel;
 	}
@@ -241,14 +244,6 @@ public abstract class Tamagotchi {
 		}
 		this.hungerLevel = hungerLevel;
 
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getTiredness() {
-		return tiredness;
 	}
 
 	/**
@@ -340,7 +335,7 @@ public abstract class Tamagotchi {
 	public void show() {
 		System.out.println("\nVoici les caractéristiques de votre tamagotchi :");
 		System.out.println("Nom : " + this.name);
-		System.out.println("Taille : " + this.height+" cm");
+		System.out.println("Taille : " + this.height + " cm");
 		System.out.println("Type : " + this.tamagotchiType);
 		System.out.println("Couleur : " + this.skinColor);
 		System.out.println("Couleur de cheveux : " + this.hairColor);
@@ -359,7 +354,7 @@ public abstract class Tamagotchi {
 	 * 
 	 * @param number
 	 */
-	public void decreasesdayRemaining(int number) {
+	public void decreasesDayRemaining(int number) {
 		setDayRemaining(this.dayRemaining - number);
 	}
 
@@ -470,18 +465,10 @@ public abstract class Tamagotchi {
 	 */
 	public void eat() {
 
-		if (hungerLevel > 0 && this.toiletDesire < 90) {
-
-			riseDirtyLevel(5);
-			riseToiletDesire(15);
-			riseTiredness(5);
-			decreasesNbAction(1);
-		} else if (this.toiletDesire >= 90) {
-			System.out.println(
-					"\nVotre tamagotchi a trop envie d'aller au toilet pour manger il risque de se faire dessus\n");
-		} else {
-			System.out.println("\nVotre tamagotchi n'a pas faim vous ne pouvez pas le nourrir\n");
-		}
+		riseDirtyLevel(5);
+		riseToiletDesire(15);
+		riseTiredness(5);
+		decreasesNbAction(1);
 
 	}
 
@@ -491,7 +478,7 @@ public abstract class Tamagotchi {
 	 */
 	public void goToToilet() {
 		if (this.toiletDesire >= 20) {
-			System.out.println(this.name + "\nest allé au toilet il n'a plus envie d'aller au toilet\n");
+			System.out.println(this.name + "est allé au toilet il n'a plus envie d'aller au toilet\n");
 			setToiletDesire(0);
 			riseDirtyLevel(5);
 			riseHungerLevel(5);
@@ -574,9 +561,9 @@ public abstract class Tamagotchi {
 		if (this.tiredness < 75 && this.toiletDesire < 70 && this.dirtLevel < 60) {
 			System.out.println("\n" + this.name + " est content d'avoir rendu visite à un ami\n");
 			riseHealth(1);
-			riseTiredness(20);
-			riseToiletDesire(10);
-			riseDirtyLevel(30);
+			riseTiredness(5);
+			riseToiletDesire(5);
+			riseDirtyLevel(10);
 			riseHungerLevel(20);
 			decreasesNbAction(1);
 		} else {
@@ -694,7 +681,8 @@ public abstract class Tamagotchi {
 	abstract protected void chooseMeal();
 
 	/**
-	 * This method create a new tamagotchi who can be used by the user if he want to change tamagotchi
+	 * This method create a new tamagotchi who can be used by the user if he want to
+	 * change tamagotchi
 	 */
 	abstract public Tamagotchi reproduce();
 

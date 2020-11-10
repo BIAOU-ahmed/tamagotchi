@@ -85,8 +85,14 @@ public class Cat extends Tamagotchi {
 	public void eat() {
 		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 90) {
 			chooseMeal();
+			super.eat();
+		}else if (this.toiletDesire >= 90) {
+			System.out.println(
+					"\nVotre tamagotchi a trop envie d'aller au toilet pour manger il risque de se faire dessus\n");
+		} else {
+			System.out.println("\nVotre tamagotchi n'a pas faim vous ne pouvez pas le nourrir\n");
 		}
-		super.eat();
+		
 	}
 
 	/**
@@ -121,7 +127,7 @@ public class Cat extends Tamagotchi {
 	 * @param height
 	 */
 	public void setHealth(int health) {
-		System.out.println("set child");
+		
 		if (health > 10) {
 			health = 10;
 		} else if (health > 0 && health <= 5) {

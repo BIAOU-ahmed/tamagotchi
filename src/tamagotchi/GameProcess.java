@@ -293,7 +293,7 @@ public class GameProcess {
 
 			MainScript.myTamagotchi.riseHeight();
 
-			MainScript.myTamagotchi.decreasesdayRemaining(1);
+			MainScript.myTamagotchi.decreasesDayRemaining(1);
 
 			// check if the tamagotchi is dead of old age
 			if (MainScript.myTamagotchi.getHealth() > 0 && MainScript.myTamagotchi.getDayRemaining() == 0) {

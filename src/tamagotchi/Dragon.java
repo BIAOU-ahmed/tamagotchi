@@ -84,8 +84,14 @@ public class Dragon extends Tamagotchi {
 	public void eat() {
 		if (super.getHungerLevel() > 0 && super.getToiletDesire() < 90) {
 			chooseMeal();
+			super.eat();
+		}else if (this.toiletDesire >= 90) {
+			System.out.println(
+					"\nVotre tamagotchi a trop envie d'aller au toilet pour manger il risque de se faire dessus\n");
+		} else {
+			System.out.println("\nVotre tamagotchi n'a pas faim vous ne pouvez pas le nourrir\n");
 		}
-		super.eat();
+		
 	}
 	
 
@@ -103,7 +109,7 @@ public class Dragon extends Tamagotchi {
 	 * This method create a new tamagotchi who can be used by the user if he want to change tamagotchi
 	 */
 	public Tamagotchi reproduce() {
-		Tamagotchi myTamagotchiChild = new Cat(getSkinColor(), getHairColor());
+		Tamagotchi myTamagotchiChild = new Dragon(getSkinColor(), getHairColor());
 		decreasesNbAction(1);
 		return myTamagotchiChild;
 	}
@@ -206,7 +212,7 @@ public class Dragon extends Tamagotchi {
 
 		int choice;
 		System.out.println("Veuillez choisir la nouritures que vous souhaitez :");
-		System.out.println("1) Chat \n2) Chient \n3) Humain \n4) Mamout \n5) Baleine ");
+		System.out.println("1) Chat \n2) Chien \n3) Humain \n4) Mamout \n5) Baleine ");
 
 		choice = Clavier.lireInt();
 
