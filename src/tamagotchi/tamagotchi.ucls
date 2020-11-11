@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.4" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
-  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="tamagotchi.Tamagotchi" project="tamagotchi" 
     file="/tamagotchi/src/tamagotchi/Tamagotchi.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1376" width="187" x="47" y="-477"/>    
-    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="tamagotchi.Dog" project="tamagotchi" file="/tamagotchi/src/tamagotchi/Dog.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="695" y="-305"/>    
+    <position height="1359" width="188" x="239" y="-192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="tamagotchi.Cat" project="tamagotchi" file="/tamagotchi/src/tamagotchi/Cat.java" 
+  <class id="2" language="java" name="tamagotchi.Cat" project="tamagotchi" file="/tamagotchi/src/tamagotchi/Cat.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="693" y="70"/>    
+    <position height="351" width="156" x="742" y="55"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="tamagotchi.Dog" project="tamagotchi" file="/tamagotchi/src/tamagotchi/Dog.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="351" width="156" x="756" y="526"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="tamagotchi.Dragon" project="tamagotchi" 
     file="/tamagotchi/src/tamagotchi/Dragon.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="351" width="156" x="526" y="302"/>    
+    <position height="-1" width="-1" x="832" y="1084"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -38,15 +38,15 @@
     </display>  
   </class>  
   <generalization id="5">    
-    <end type="SOURCE" refId="3"/>    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="6">    
-    <end type="SOURCE" refId="4"/>    
+    <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <generalization id="7">    
-    <end type="SOURCE" refId="2"/>    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
